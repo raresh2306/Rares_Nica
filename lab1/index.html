@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Rețetele Mele Preferate</title>
+  </head>
+  <body class="bg-zinc-700 text-white font-sans">
+
+    <!-- TEXT INTRODUCTIV -->
+    <header class="text-center py-10 px-6">
+      <h1 class="text-3xl font-bold mb-4 text-lime-400">Rețetele Mele Preferate</h1>
+      <p class="max-w-2xl mx-auto text-zinc-200">
+        Bine ai venit în colțul meu culinar! 🍲  
+        Explorează rețetele mele preferate și abonează-te la newsletter ca să primești inspirație delicioasă direct în inboxul tău.
+      </p>
+    </header>
+
+    <!-- SECȚIUNEA REȚETE -->
+    <section class="max-w-5xl mx-auto px-6 py-10">
+      <h2 class="text-2xl font-semibold text-center mb-8 text-lime-400">Rețete</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Rețeta 1 -->
+        <div class="bg-zinc-800 rounded-2xl shadow-lg overflow-hidden hover:scale-105 duration-300">
+          <img src="images/paste.jpg" alt="Paste Carbonara" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Paste Carbonara</h3>
+            <p class="text-sm text-zinc-300 mb-4">
+              O rețetă clasică italiană cu ou, parmezan, piper proaspat macinat si gu — simplă și savuroasă.
+            </p>
+            <a href="https://www.jamieoliver.com/recipes/pasta-recipes/easy-carbonara/" target="_blank"
+              class="inline-block px-4 py-2 bg-lime-500 text-zinc-800 font-medium rounded-md hover:bg-lime-600">
+              Vezi rețeta completă
+            </a>
+          </div>
+        </div>
+
+        <!-- Rețeta 2 -->
+        <div class="bg-zinc-800 rounded-2xl shadow-lg overflow-hidden hover:scale-105 duration-300">
+          <img src="images/supa.jpg" alt="Supă de legume" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Supă de legume</h3>
+            <p class="text-sm text-zinc-300 mb-4">
+              O supă ușoară, plină de vitamine, perfectă pentru zilele reci sau pentru o detoxifiere ușoară.
+            </p>
+            <a href="https://www.cookingclassy.com/vegetable-soup/" target="_blank"
+              class="inline-block px-4 py-2 bg-lime-500 text-zinc-800 font-medium rounded-md hover:bg-lime-600">
+              Vezi rețeta completă
+            </a>
+          </div>
+        </div>
+
+        <!-- Rețeta 3 -->
+        <div class="bg-zinc-800 rounded-2xl shadow-lg overflow-hidden hover:scale-105 duration-300">
+          <img src="images/brownie.jpg" alt="Brownie cu ciocolată" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Brownie cu ciocolată</h3>
+            <p class="text-sm text-zinc-300 mb-4">
+              Desertul perfect pentru iubitorii de ciocolată — moale la interior și crocant la exterior.
+            </p>
+            <a href="https://www.allrecipes.com/recipe/10549/best-brownies/" target="_blank"
+              class="inline-block px-4 py-2 bg-lime-500 text-zinc-800 font-medium rounded-md hover:bg-lime-600">
+              Vezi rețeta completă
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECȚIUNEA ABONARE -->
+    <section class="bg-zinc-800 py-12 px-6 mt-12">
+      <div class="max-w-md mx-auto text-center">
+        <h2 class="text-2xl font-semibold mb-4 text-lime-400">Abonare la Newsletter</h2>
+        <p class="text-zinc-300 mb-6">
+          Completează formularul de mai jos pentru a primi cele mai noi rețete direct în inboxul tău! 🍰
+        </p>
+
+        <form class="flex flex-col space-y-4">
+          <input type="text" placeholder="Nume" 
+            class="p-3 rounded-md bg-zinc-700 text-white focus:outline-none border border-zinc-600 placeholder:text-zinc-400" />
+
+          <input type="email" placeholder="Adresa de email" 
+            class="p-3 rounded-md bg-zinc-700 text-white focus:outline-none border border-zinc-600 placeholder:text-zinc-400" />
+
+          <button type="submit" 
+            class="bg-lime-500 text-zinc-900 font-medium py-3 rounded-md hover:bg-lime-600 duration-300">
+            Abonează-te
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-6 text-zinc-400 text-sm">
+      © 2025 Rețetele Mele Preferate. Toate drepturile rezervate.
+    </footer>
+
+  </body>
+</html>
