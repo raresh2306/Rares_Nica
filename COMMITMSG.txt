@@ -1,0 +1,1 @@
+Initial site setup: Bootstrap assets, SCSS build, scripts, content 

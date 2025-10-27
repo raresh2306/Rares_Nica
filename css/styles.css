@@ -1,0 +1,239 @@
+.xl-text {
+  font-size: 65px;
+}
+
+.header {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url("../images/header-background.jpg") left center no-repeat;
+  background-size: cover;
+  height: 600px;
+}
+
+.navbar-nav .nav-link {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  font-size: 1.2rem;
+  color: var(--bs-primary);
+  opacity: 1;
+}
+
+.btn-primary {
+  color: var(--bs-light);
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  transform: scale(1.1);
+  color: var(--bs-light);
+}
+
+html {
+  scroll-padding-top: 150px; /* Adjust to your needs */
+}
+
+.vertical-decoration {
+  top: 12%;
+  width: 24px;
+}
+
+.hr-heading {
+  display: inline-block;
+  width: 5rem;
+  height: 0.25rem;
+  margin-top: 0.625rem;
+  border: none;
+  background-color: var(--bs-primary);
+  opacity: 1;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.video-modal .modal-dialog {
+  max-width: 1150px;
+  margin-top: 25px;
+}
+
+.navbar-toggler {
+  background-color: transparent;
+  border-color: var(--bs-primary);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23F46036' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.navbar {
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar-sticky {
+  opacity: 0.9;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.details .vertical-decoration {
+  top: 25px;
+  left: 0;
+  width: 24px;
+}
+
+.details-2 .vertical-decoration {
+  top: 5%;
+  right: 0;
+  width: 24px;
+}
+
+@media (max-width: 992px) {
+  .xl-text {
+    font-size: 48px;
+  }
+  .header {
+    text-align: start;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url("../images/header-background.jpg") center center no-repeat;
+  }
+  .video-points {
+    padding: 0 !important;
+    text-align: center;
+  }
+}
+.fixed-for {
+  display: inline-block;
+  white-space: nowrap; /* Prevents text wrapping */
+  margin-right: 5px; /* Optional: Adds spacing between "for" and dynamic word */
+}
+
+.text-primary {
+  display: inline-block;
+  white-space: nowrap; /* Prevents text wrapping on smaller screens */
+}
+
+.video-play-button {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 32px;
+  height: 44px;
+  border-radius: 50%;
+  display: block;
+  box-sizing: content-box;
+  padding: 1.125rem 1.25rem 1.125rem 1.75rem;
+  cursor: pointer;
+}
+
+.video-play-button:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: block;
+  background: var(--bs-primary);
+  cursor: pointer;
+  animation: pulse-border 1500ms ease-in-out infinite;
+}
+
+.video-play-button:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: block;
+  background: var(--bs-primary);
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.video-play-button span {
+  position: relative;
+  display: block;
+  z-index: 3;
+  top: 6px;
+  left: 4px;
+  width: 0;
+  height: 0;
+  border-left: 26px solid #fff;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+}
+
+@keyframes pulse-border {
+  0% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+    opacity: 0;
+  }
+}
+.to-top-btn {
+  position: fixed;
+  z-index: 100;
+  bottom: 30px;
+  right: 30px;
+  opacity: 0;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  background-color: var(--bs-primary);
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.to-top-btn:hover {
+  background-color: var(--bs-primary);
+  opacity: 1;
+}
+
+.icon-white {
+  color: lavender;
+}
+
+.show {
+  opacity: 0.75;
+}
+
+.modal-content {
+  background-color: var(--bs-dark);
+  opacity: 1;
+  /* Fully opaque */
+}
+
+.modal {
+  background: #000000;
+  opacity: 0.95;
+}
+
+/* Utility: custom blue text (alternative to Bootstrap's built-in .text-primary) */
+.text-albastru {
+  color: var(--bs-primary);
+}
