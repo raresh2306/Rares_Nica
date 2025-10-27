@@ -237,3 +237,50 @@ html {
 .text-albastru {
   color: var(--bs-primary);
 }
+
+/* Partner Slider Styles */
+.partner-slider-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.partner-slider {
+  display: flex;
+  animation: slide 50s linear infinite;
+  gap: 50px;
+  will-change: transform;
+}
+
+.partner-logo-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.partner-logo-item img {
+  max-width: 150px;
+  max-height: 100px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+
+.partner-logo-item:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
