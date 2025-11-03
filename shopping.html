@@ -36,13 +36,25 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="team.html">Team</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Team
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item text-primary" href="team.html">Men's Team</a></li>
+                <li><a class="dropdown-item text-primary" href="team-women.html">Women's Team</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="matches.html">Matches</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Matches
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item text-primary" href="matches.html">Men's Matches</a></li>
+                <li><a class="dropdown-item text-primary" href="matches-women.html">Women's Matches</a></li>
+              </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.html">History</a>
@@ -51,7 +63,7 @@
               <a class="nav-link" href="gallery.html">Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="shopping.html">Shopping</a>
+              <a class="nav-link" href="shopping.html">Shopping</a>
             </li>
           </ul>
           <span class="nav-item">

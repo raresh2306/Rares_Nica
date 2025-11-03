@@ -63,3 +63,57 @@ if (videoModal !== null) {
   });
 }
 
+
+// Player modal (click to expand)
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.player-card');
+  const modalEl = document.getElementById('playerModal');
+  if (!modalEl || cards.length === 0) return;
+
+  const modal = new bootstrap.Modal(modalEl);
+  const modalTitle = document.getElementById('playerModalLabel');
+  const modalImg = document.getElementById('playerModalImg');
+  const modalName = document.getElementById('playerModalName');
+  const modalPos = document.getElementById('playerModalPos');
+  const modalStats = document.getElementById('playerModalStats');
+  const modalDetail = document.getElementById('playerModalDetail');
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const name = card.getAttribute('data-name') || '';
+      const position = card.getAttribute('data-position') || '';
+      const number = card.getAttribute('data-number') || '';
+      const matches = card.getAttribute('data-matches');
+      const goals = card.getAttribute('data-goals');
+      const assists = card.getAttribute('data-assists');
+      const cleanSheets = card.getAttribute('data-cleansheets');
+      const saves = card.getAttribute('data-saves');
+      const detail = card.getAttribute('data-detail') || '';
+
+      // Image from card
+      const img = card.querySelector('img');
+      if (img) {
+        modalImg.setAttribute('src', img.getAttribute('src'));
+        modalImg.setAttribute('alt', name);
+      }
+
+      modalTitle.textContent = name;
+      modalName.textContent = `${name}  - ${number}`;
+      modalPos.textContent = position;
+
+      // Build stats block depending on position
+      if (position.toLowerCase() === 'goalkeeper') {
+        modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
+                                <span class="badge bg-success me-2">Clean sheets: ${cleanSheets || '-'}</span>
+                                <span class="badge bg-info">Saves: ${saves || '-'}</span>`;
+      } else {
+        modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
+                                <span class="badge bg-success me-2">Goals: ${goals || '-'}</span>
+                                <span class="badge bg-info">Assists: ${assists || '-'}</span>`;
+      }
+
+      modalDetail.textContent = detail;
+      modal.show();
+    });
+  });
+});
