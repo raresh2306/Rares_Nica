@@ -2,6 +2,17 @@
 // Development flag: if true, cookie modal always shows (ignores stored consent)
 const SHOW_COOKIE_MODAL_DURING_DEV = true;
 
+// Helper: slugify player names to file names within /players
+function slugifyNameToFile(name) {
+  const slug = name
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  return `players/${slug}.html`;
+}
+
 //Replace Me text in header
 const checkReplace = document.querySelector('.replace-me');
 
@@ -41,32 +52,6 @@ document.addEventListener('DOMContentLoaded', userScroll);
 
 
 
-// Video Modal
-const videoBtn = document.querySelector('.video-btn');
-const videoModal = document.querySelector('#videoModal');
-const video = document.querySelector('#video');
-let videoSrc;
-
-if (videoBtn !== null) {
-  videoBtn.addEventListener('click', () => {
-    videoSrc = videoBtn.getAttribute('data-bs-src');
-  });
-}
-
-if (videoModal !== null) {
-  videoModal.addEventListener('shown.bs.modal', () => {
-    video.setAttribute(
-      'src',
-      videoSrc + '?autoplay=1;modestbranding=1;showInfo=0'
-    );
-  });
-
-  videoModal.addEventListener('hide.bs.modal', () => {
-    video.setAttribute('src', videoSrc);
-  });
-}
-
-// Cookie consent modal with localStorage persistence
 function setupCookieConsent() {
   const consentKey = 'cookieConsent';
 
@@ -77,11 +62,13 @@ function setupCookieConsent() {
         shouldShow = false;
       }
     } catch (_) {
-      // storage unavailable; default to showing
+      
     }
   }
 
   if (!shouldShow) return;
+
+
 
   const consentModalEl = document.getElementById('cookieConsentModal');
   if (!consentModalEl || typeof bootstrap === 'undefined') return;
@@ -157,7 +144,6 @@ function setupFormEnhancements() {
   });
 }
 
-// Player modal (click to expand)
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.player-card');
   const modalEl = document.getElementById('playerModal');
@@ -170,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalPos = document.getElementById('playerModalPos');
   const modalStats = document.getElementById('playerModalStats');
   const modalDetail = document.getElementById('playerModalDetail');
+  const modalBioBtn = document.getElementById('playerModalBioBtn');
 
   cards.forEach((card) => {
     card.addEventListener('click', () => {
@@ -206,6 +193,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       modalDetail.textContent = detail;
+
+      // Link to per-player page inside /players
+      if (modalBioBtn) {
+        modalBioBtn.setAttribute('href', slugifyNameToFile(name));
+      }
+
       modal.show();
     });
   });
