@@ -1,4 +1,7 @@
 
+// Development flag: if true, cookie modal always shows (ignores stored consent)
+const SHOW_COOKIE_MODAL_DURING_DEV = true;
+
 //Replace Me text in header
 const checkReplace = document.querySelector('.replace-me');
 
@@ -63,6 +66,96 @@ if (videoModal !== null) {
   });
 }
 
+// Cookie consent modal with localStorage persistence
+function setupCookieConsent() {
+  const consentKey = 'cookieConsent';
+
+  let shouldShow = true;
+  if (!SHOW_COOKIE_MODAL_DURING_DEV) {
+    try {
+      if (localStorage.getItem(consentKey) === 'true') {
+        shouldShow = false;
+      }
+    } catch (_) {
+      // storage unavailable; default to showing
+    }
+  }
+
+  if (!shouldShow) return;
+
+  const consentModalEl = document.getElementById('cookieConsentModal');
+  if (!consentModalEl || typeof bootstrap === 'undefined') return;
+
+  const consentModal = new bootstrap.Modal(consentModalEl);
+  const acceptBtn = document.getElementById('acceptCookiesBtn');
+
+  consentModal.show();
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(consentKey, 'true');
+      } catch (_) {}
+      consentModal.hide();
+    });
+  }
+}
+
+// Smooth scroll and Back-to-Top behavior
+function setupSmoothScroll() {
+  const samePageLinks = document.querySelectorAll('a[href^="#"]');
+  samePageLinks.forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    link.addEventListener('click', (e) => {
+      const targetId = href.slice(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const toTopBtn = document.querySelector('#to-top');
+  if (toTopBtn) {
+    toTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+}
+
+// Form enhancements: enable/disable submit and success modal
+function setupFormEnhancements() {
+  const form = document.querySelector('#contact form');
+  if (!form) return;
+
+  const agree = form.querySelector('#agree-check');
+  const submitBtn = form.querySelector('input[type="submit"]');
+
+  if (agree && submitBtn) {
+    submitBtn.disabled = !agree.checked;
+    agree.addEventListener('change', () => {
+      submitBtn.disabled = !agree.checked;
+    });
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const successEl = document.getElementById('formSuccessModal');
+    if (successEl && typeof bootstrap !== 'undefined') {
+      const successModal = new bootstrap.Modal(successEl);
+      successModal.show();
+    } else {
+      alert('Thanks! Your request has been received. We will contact you soon.');
+    }
+
+    form.reset();
+    if (submitBtn) submitBtn.disabled = true;
+  });
+}
 
 // Player modal (click to expand)
 document.addEventListener('DOMContentLoaded', () => {
@@ -116,4 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.show();
     });
   });
+});
+
+// Initialize extras
+document.addEventListener('DOMContentLoaded', () => {
+  setupSmoothScroll();
+  setupFormEnhancements();
+  setupCookieConsent();
 });
