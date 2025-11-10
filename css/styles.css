@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Blaugrana';
+  src: url('../fonts/Blaugrana font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .xl-text {
   font-size: 65px;
 }
@@ -81,23 +89,64 @@ html {
   overflow: hidden;
 }
 
+/* Faded big number over the player image (always visible) */
+.player-card::before {
+  content: attr(data-number);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
+  line-height: 1;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Name bar overlay over the image (always visible) */
+.player-card .card-body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0; /* place the name at the bottom */
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  text-align: center;
+  z-index: 2;
+  transition: all 200ms ease-in-out;
+}
+
+/* Ensure the image doesn't add gaps */
+.player-card img {
+  display: block;
+}
+
 .player-overlay {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 40%;
+  height: 50%;
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.85) 70%,
     rgba(0, 0, 0, 0) 100%
   );
-  color: #fff;
+  color: #EDBB00;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   text-align: center;
-  padding: 12px;
+  padding: 20px 12px;
+  padding-bottom: 10px;
   opacity: 0;
   transform: translateY(16px);
   transition: all 0.25s ease-in-out;
@@ -107,18 +156,41 @@ html {
 .player-card:hover .player-overlay {
   opacity: 1;
   transform: translateY(0);
+  z-index: 3;
+}
+
+/* On hover move the name bar to the top, above stats */
+.player-card:hover .card-body {
+  top: 0;
+  bottom: auto;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 4; /* above overlay */
 }
 
 .overlay-content {
   width: 100%;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
+/* Hide the number in overlay since it's already shown faded over the image */
 .overlay-content .display-6 {
-  line-height: 1;
+  display: none;
 }
 
 .overlay-content .small {
   opacity: 0.9;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .navbar {
@@ -350,4 +422,13 @@ html {
 .navbar .dropdown-item:focus {
   background-color: #e9ecef;
   color: #212529;
+}
+
+
+#team .player-card .card-title {
+  font-family: 'Blaugrana', 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.05em;
+  color: #EDBB00;
+  text-align: center;
 }
