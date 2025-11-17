@@ -15,7 +15,6 @@ if (checkReplace !== null) {
   });
 }
 
-// User Scroll For Navbar
 function userScroll() {
   const navbar = document.querySelector('.navbar');
   const toTopBtn = document.querySelector('#to-top');
@@ -47,24 +46,24 @@ const videoModal = document.querySelector('#videoModal');
 const video = document.querySelector('#video');
 let videoSrc;
 
-if (videoBtn !== null) {
-  videoBtn.addEventListener('click', () => {
-    videoSrc = videoBtn.getAttribute('data-bs-src');
-  });
-}
+// if (videoBtn !== null) {
+//   videoBtn.addEventListener('click', () => {
+//     videoSrc = videoBtn.getAttribute('data-bs-src');
+//   });
+// }
 
-if (videoModal !== null) {
-  videoModal.addEventListener('shown.bs.modal', () => {
-    video.setAttribute(
-      'src',
-      videoSrc + '?autoplay=1;modestbranding=1;showInfo=0'
-    );
-  });
+// if (videoModal !== null) {
+//   videoModal.addEventListener('shown.bs.modal', () => {
+//     video.setAttribute(
+//       'src',
+//       videoSrc + '?autoplay=1;modestbranding=1;showInfo=0'
+//     );
+//   });
 
-  videoModal.addEventListener('hide.bs.modal', () => {
-    video.setAttribute('src', videoSrc);
-  });
-}
+//   videoModal.addEventListener('hide.bs.modal', () => {
+//     video.setAttribute('src', videoSrc);
+//   });
+// }
 
 // Cookie consent modal with localStorage persistence
 function setupCookieConsent() {
@@ -157,7 +156,7 @@ function setupFormEnhancements() {
   });
 }
 
-// Player modal (click to expand)
+
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.player-card');
   const modalEl = document.getElementById('playerModal');
