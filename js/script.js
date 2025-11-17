@@ -169,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalPos = document.getElementById('playerModalPos');
   const modalStats = document.getElementById('playerModalStats');
   const modalDetail = document.getElementById('playerModalDetail');
+  const modalBioBtn = document.getElementById('playerModalBioBtn');
 
   cards.forEach((card) => {
     card.addEventListener('click', () => {
@@ -205,6 +206,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       modalDetail.textContent = detail;
+
+      if (modalBioBtn) {
+        const bioUrl = card.getAttribute('data-bio-url');
+        const fallbackId = card.getAttribute('data-bio-id');
+        if (bioUrl || fallbackId) {
+          const href = bioUrl || `player-bios.html#${fallbackId}`;
+          modalBioBtn.classList.remove('disabled');
+          modalBioBtn.setAttribute('aria-disabled', 'false');
+          modalBioBtn.setAttribute('href', href);
+        } else {
+          modalBioBtn.classList.add('disabled');
+          modalBioBtn.setAttribute('aria-disabled', 'true');
+          modalBioBtn.setAttribute('href', '#');
+        }
+      }
+
       modal.show();
     });
   });
