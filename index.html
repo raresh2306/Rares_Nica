@@ -244,27 +244,27 @@
               </ul>
           </div>
           <div class="col-md-5 offset-md-1">
-            <form>
+            <form action="http://localhost:3000/submit" method="POST">
               <div class="mb-4">
-                <input type="text" class="form-control bg-secondary" placeholder="Enter name">
+                <input type="text" name="name" class="form-control bg-secondary" placeholder="Enter name" required>
               </div>
               <div class="mb-4">
-                <input type="email" class="form-control bg-secondary" placeholder="Enter email">
+                <input type="email" name="email" class="form-control bg-secondary" placeholder="Enter email" required>
               </div>
               <div class="mb-4">
-                <input type="text" class="form-control bg-secondary" placeholder="Enter phone">
+                <input type="text" name="phone" class="form-control bg-secondary" placeholder="Enter phone">
               </div>
               <div class="mb-4">
                 <select name="interested" id="interested" class="form-control bg-secondary">
-                  <option>Interested In...</option>
-                  <option value="erp">First team</option>
-                  <option value="crm">Shop</option>
-                  <option value="cms">News</option>
-                  <option value="sfa">Fixtures and Tickets</option>
+                  <option value="">Interested In...</option>
+                  <option value="First team">First team</option>
+                  <option value="Shop">Shop</option>
+                  <option value="News">News</option>
+                  <option value="Fixtures and Tickets">Fixtures and Tickets</option>
                 </select>
               </div>
               <div class="mb-4 form-check">
-                <input type="checkbox" id="agree-check" />
+                <input type="checkbox" name="agree" value="yes" id="agree-check" required />
                 <label for="agree-check" class="form-check-label">
                   I agree to the <a href="privacy.html">Privacy Policy</a>
                 </label>
