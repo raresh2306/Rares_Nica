@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -22,6 +23,13 @@ app.use(cors({
             callback(null, true); // Allow all origins in development
         }
     },
+
+const app = express();
+
+// Configure CORS to allow credentials
+app.use(cors({
+    origin: 'http://localhost:8081',
+
     credentials: true
 }));
 
