@@ -502,3 +502,76 @@ body[data-player-slug="gerard-martin"] #playerProfileRoot img {
   top: auto !important;
   bottom: 0 !important;
 }
+
+/* Gallery cards: add primary color borders */
+.gallery-grid .card,
+.gallery-small-card {
+  border: 2px solid var(--bs-primary) !important;
+  border-radius: 15px !important;
+  overflow: hidden;
+}
+
+.gallery-grid .card-img-top,
+.gallery-small-card .card-img-top {
+  border-radius: 13px 13px 0 0 !important;
+}
+
+/* Gallery layout: ensure equal heights */
+@media (min-width: 992px) {
+  /* Columns with small cards should stretch to match the manita column height */
+  .gallery-grid .col-lg-4.d-flex.flex-column {
+    align-items: stretch;
+  }
+  
+  /* Small cards should each take roughly half the column height */
+  .gallery-small-card {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  
+  .gallery-small-card:first-child {
+    margin-bottom: 1rem;
+  }
+  
+  /* Control image height in small cards - adjust to fit better */
+  .gallery-small-card .card-img-top {
+    object-fit: cover;
+    height: 180px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+  
+  /* Make card body flexible */
+  .gallery-small-card .card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  .gallery-small-card .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+  
+  .gallery-small-card .card-text {
+    font-size: 0.875rem;
+    flex: 1 1 auto;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+}
+
+/* Testimonial cards: add primary color borders */
+.testimonial-card {
+  border: 2px solid var(--bs-primary) !important;
+  border-radius: 15px !important;
+  overflow: hidden;
+}
+
+.testimonial-card .card-img-top {
+  border-radius: 13px 13px 0 0 !important;
+}
