@@ -104,7 +104,7 @@ const template = (player) => `<!DOCTYPE html>
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://www.instagram.com/raresh.23/" target="_blank">
+              <a href="https://twitter.com" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -176,7 +176,7 @@ const template = (player) => `<!DOCTYPE html>
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
+              <a href="#" class="text-decoration-none">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">
