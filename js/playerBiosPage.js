@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     section.innerHTML = `
       <div class="row g-4 align-items-center">
         <div class="col-md-4">
-          <img src="${player.image}" alt="${player.name}" class="img-fluid rounded shadow-sm">
+          <img src="${player.image.startsWith('../') ? player.image.substring(3) : player.image}" alt="${player.name}" class="img-fluid rounded shadow-sm">
         </div>
         <div class="col-md-8">
           <p class="text-uppercase text-primary fw-semibold mb-1">${player.position} • #${player.number}</p>
@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ${statList(player.stats)}
           </div>
           <p class="mb-2">${player.detail}</p>
-          <p class="mb-3 text-muted">${player.bio}</p>
+          <div class="mb-3 text-muted">
+            ${Array.isArray(player.bio) 
+              ? player.bio.map(paragraph => `<p class="mb-2">${paragraph}</p>`).join('')
+              : player.bio.split(/\n\n+/).map(paragraph => `<p class="mb-2">${paragraph.trim()}</p>`).join('')
+            }
+          </div>
           <a class="btn btn-outline-light btn-sm" href="players/${player.slug}.html">View full bio</a>
         </div>
       </div>`;

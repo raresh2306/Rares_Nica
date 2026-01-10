@@ -478,3 +478,27 @@ html {
     rgba(0, 0, 0, 0) 100%
   ) !important;
 }
+
+/* Larger image for Gerard Martin's profile page */
+body[data-player-slug="gerard-martin"] #playerProfileRoot img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+/* Coach card: keep name at bottom, just scale on hover */
+.coach-card:hover .card-body {
+  top: auto !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
+}
+
+.coach-card .card-body {
+  top: auto !important;
+  bottom: 0 !important;
+}

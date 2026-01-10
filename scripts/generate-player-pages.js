@@ -96,7 +96,7 @@ const template = (player) => `<!DOCTYPE html>
               <a class="nav-link" href="../shopping.html">Shopping</a>
             </li>
           </ul>
-          <span class="nav-item">
+          <span class="nav-item d-flex align-items-center gap-2">
             <span class="fa-stack">
               <a href="https://facebook.com" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
@@ -104,11 +104,14 @@ const template = (player) => `<!DOCTYPE html>
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
             </span>
+            <a href="../login.html" class="btn btn-sm text-white" style="background-color: #a50044; border: none; padding: 0.5rem 1rem;">
+              <i class="fas fa-user me-1"></i>Login
+            </a>
           </span>
         </div>
       </div>
@@ -123,10 +126,10 @@ const template = (player) => `<!DOCTYPE html>
       <div class="container py-5">
         <div class="row">
           <div class="col-lg-10">
-            <p class="text-uppercase text-primary fw-semibold mb-2">Player profile</p>
+            <p class="text-uppercase text-primary fw-semibold mb-2">${player.position === 'Head Coach' ? 'Coach profile' : 'Player profile'}</p>
             <h1 class="xl-text text-secondary">
               ${player.name}
-              <span class="text-primary fw-bold">#${player.number}</span>
+              ${player.number ? `<span class="text-primary fw-bold">#${player.number}</span>` : ''}
             </h1>
             <p class="lead mb-0">${player.detail}</p>
           </div>
@@ -173,7 +176,7 @@ const template = (player) => `<!DOCTYPE html>
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="#" class="text-decoration-none">
+              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">

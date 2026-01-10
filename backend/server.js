@@ -23,13 +23,6 @@ app.use(cors({
             callback(null, true); // Allow all origins in development
         }
     },
-
-const app = express();
-
-// Configure CORS to allow credentials
-app.use(cors({
-    origin: 'http://localhost:8081',
-
     credentials: true
 }));
 
@@ -51,11 +44,13 @@ app.use(session({
 
 let db;
 function connectWithRetry() {
+    const timezone = process.env.DB_TIMEZONE || '+02:00';
     db = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
-        database: process.env.DB_NAME
+        database: process.env.DB_NAME,
+        timezone: timezone
     });
 
     db.connect(err => {
@@ -64,7 +59,17 @@ function connectWithRetry() {
             setTimeout(connectWithRetry, 5000);
         } else {
             console.log('Connected to MySQL Database!');
-            initializeTable();
+            // Set timezone - use environment variable or default to UTC+2 (Central European Time)
+            // Examples: '+02:00' for UTC+2, '+01:00' for UTC+1, 'SYSTEM' for server timezone
+            const timezone = process.env.DB_TIMEZONE || '+02:00';
+            db.query(`SET time_zone = ?`, [timezone], (tzErr) => {
+                if (tzErr) {
+                    console.log('Warning: Could not set timezone, using default:', tzErr.message);
+                } else {
+                    console.log(`Timezone set to ${timezone}`);
+                }
+                initializeTable();
+            });
         }
     });
 }
@@ -278,16 +283,25 @@ app.post('/submit', (req, res) => {
 
     const { name, email, phone, interested, agree } = req.body;
 
-    const sql = 'INSERT INTO inquiries (name, email, phone, interested, agreed_policy) VALUES (?, ?, ?, ?, ?)';
-    
-    db.query(sql, [name, email, phone, interested, agree], (err, result) => {
-        if (err) {
-            console.error("Error inserting data:", err);
-            res.status(500).send('Error saving data');
-        } else {
-           
-            res.status(200).json({ message: "Submission successful" });
+    // Set timezone before query to ensure NOW() uses UTC+2
+    const timezone = process.env.DB_TIMEZONE || '+02:00';
+    db.query('SET time_zone = ?', [timezone], (tzErr) => {
+        if (tzErr) {
+            console.error("Error setting timezone:", tzErr);
         }
+        
+        // Now insert with explicit timestamp using NOW() which will respect the session timezone
+        const sql = 'INSERT INTO inquiries (name, email, phone, interested, agreed_policy, created_at) VALUES (?, ?, ?, ?, ?, NOW())';
+        
+        db.query(sql, [name, email, phone, interested, agree], (err, result) => {
+            if (err) {
+                console.error("Error inserting data:", err);
+                res.status(500).send('Error saving data');
+            } else {
+               
+                res.status(200).json({ message: "Submission successful" });
+            }
+        });
     });
 });
 

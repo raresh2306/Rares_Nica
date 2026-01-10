@@ -172,19 +172,64 @@ function setupFormEnhancements() {
     });
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const successEl = document.getElementById('formSuccessModal');
-    if (successEl && typeof bootstrap !== 'undefined') {
-      const successModal = new bootstrap.Modal(successEl);
-      successModal.show();
-    } else {
-      alert('Thanks! Your request has been received. We will contact you soon.');
+    // Get form data
+    const formData = new FormData(form);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const phone = formData.get('phone') || '';
+    const interested = formData.get('interested') || '';
+    const agree = formData.get('agree') ? 'yes' : 'no';
+
+    // Validate required fields
+    if (!name || !email || !interested) {
+      alert('Please fill in all required fields (name, email, and interest).');
+      return;
     }
 
-    form.reset();
+    // Disable submit button during submission
     if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      // Send data to backend
+      const response = await fetch('http://localhost:3000/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          interested,
+          agree
+        })
+      });
+
+      if (response.ok) {
+        // Show success modal
+        const successEl = document.getElementById('formSuccessModal');
+        if (successEl && typeof bootstrap !== 'undefined') {
+          const successModal = new bootstrap.Modal(successEl);
+          successModal.show();
+        } else {
+          alert('Thanks! Your request has been received. We will contact you soon.');
+        }
+
+        // Reset form
+        form.reset();
+        if (submitBtn) submitBtn.disabled = true;
+      } else {
+        alert('Error submitting form. Please try again.');
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Network error. Please try again later.');
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 }
 
