@@ -432,3 +432,49 @@ html {
   color: #EDBB00;
   text-align: center;
 }
+
+#team-women .player-card .card-title {
+  font-family: 'Blaugrana', 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.05em;
+  color: #EDBB00;
+  text-align: center;
+}
+
+/* Women's team cards: simple zoom on hover, no overlay */
+#team-women .player-card {
+  transition: transform 0.3s ease-in-out;
+}
+
+#team-women .player-card:hover {
+  transform: scale(1.05);
+}
+
+/* Hide overlay completely for women's team (always hidden) */
+#team-women .player-card .player-overlay {
+  display: none !important;
+}
+
+/* Keep card-body at bottom always (don't move to top on hover) */
+#team-women .player-card .card-body {
+  top: auto !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
+}
+
+/* Override hover styles for women's team */
+#team-women .player-card:hover .card-body {
+  top: auto !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.45) 60%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
+}

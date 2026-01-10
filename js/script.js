@@ -226,18 +226,26 @@ document.addEventListener('DOMContentLoaded', () => {
       modalName.textContent = `${name}  - ${number}`;
       modalPos.textContent = position;
 
-      // Build stats block depending on position
-      if (position.toLowerCase() === 'goalkeeper') {
-        modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
-                                <span class="badge bg-success me-2">Clean sheets: ${cleanSheets || '-'}</span>
-                                <span class="badge bg-info">Saves: ${saves || '-'}</span>`;
-      } else {
-        modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
-                                <span class="badge bg-success me-2">Goals: ${goals || '-'}</span>
-                                <span class="badge bg-info">Assists: ${assists || '-'}</span>`;
+      // Build stats block depending on position (only if stats exist)
+      if (modalStats) {
+        if (matches || goals || assists || cleanSheets || saves) {
+          if (position.toLowerCase() === 'goalkeeper') {
+            modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
+                                    <span class="badge bg-success me-2">Clean sheets: ${cleanSheets || '-'}</span>
+                                    <span class="badge bg-info">Saves: ${saves || '-'}</span>`;
+          } else {
+            modalStats.innerHTML = `<span class="badge bg-primary me-2">Matches: ${matches || '-'}</span>
+                                    <span class="badge bg-success me-2">Goals: ${goals || '-'}</span>
+                                    <span class="badge bg-info">Assists: ${assists || '-'}</span>`;
+          }
+        } else {
+          modalStats.innerHTML = '';
+        }
       }
 
-      modalDetail.textContent = detail;
+      if (modalDetail) {
+        modalDetail.textContent = detail;
+      }
 
       if (modalBioBtn) {
         const bioUrl = card.getAttribute('data-bio-url');
