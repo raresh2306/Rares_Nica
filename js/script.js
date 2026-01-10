@@ -1,6 +1,6 @@
 
 // Development flag: if true, cookie modal always shows (ignores stored consent)
-const SHOW_COOKIE_MODAL_DURING_DEV = true;
+const SHOW_COOKIE_MODAL_DURING_DEV = false;
 
 //Replace Me text in header
 const checkReplace = document.querySelector('.replace-me');
@@ -68,34 +68,66 @@ let videoSrc;
 // Cookie consent modal with localStorage persistence
 function setupCookieConsent() {
   const consentKey = 'cookieConsent';
+  const consentModalEl = document.getElementById('cookieConsentModal');
+  
+  if (!consentModalEl || typeof bootstrap === 'undefined') return;
 
+  // Check if user has already accepted or rejected cookies
   let shouldShow = true;
   if (!SHOW_COOKIE_MODAL_DURING_DEV) {
     try {
-      if (localStorage.getItem(consentKey) === 'true') {
+      const storedConsent = localStorage.getItem(consentKey);
+      // Don't show if user has accepted ('accepted') or rejected ('rejected')
+      if (storedConsent === 'accepted' || storedConsent === 'rejected') {
         shouldShow = false;
       }
     } catch (_) {
-      // storage unavailable; default to showing
+      // localStorage unavailable; default to showing
     }
   }
 
   if (!shouldShow) return;
 
-  const consentModalEl = document.getElementById('cookieConsentModal');
-  if (!consentModalEl || typeof bootstrap === 'undefined') return;
-
   const consentModal = new bootstrap.Modal(consentModalEl);
   const acceptBtn = document.getElementById('acceptCookiesBtn');
+  const rejectBtn = consentModalEl.querySelector('.btn-outline-light[data-bs-dismiss]');
 
+  // Show the modal
   consentModal.show();
 
+  // Handle Accept button
   if (acceptBtn) {
     acceptBtn.addEventListener('click', () => {
       try {
-        localStorage.setItem(consentKey, 'true');
-      } catch (_) {}
+        localStorage.setItem(consentKey, 'accepted');
+      } catch (_) {
+        // localStorage unavailable
+      }
       consentModal.hide();
+    });
+  }
+
+  // Handle Reject button - also save preference so it doesn't show again
+  if (rejectBtn) {
+    rejectBtn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(consentKey, 'rejected');
+      } catch (_) {
+        // localStorage unavailable
+      }
+      // Modal will hide automatically via data-bs-dismiss
+    });
+  }
+
+  // Handle close button (X) - treat as rejection
+  const closeBtn = consentModalEl.querySelector('.btn-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      try {
+        localStorage.setItem(consentKey, 'rejected');
+      } catch (_) {
+        // localStorage unavailable
+      }
     });
   }
 }
