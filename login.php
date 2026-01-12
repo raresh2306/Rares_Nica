@@ -1,3 +1,6 @@
+<?php
+require_once 'php/config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -276,7 +279,7 @@
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
             </span>
-            <a href="login.html" class="btn btn-sm text-white" style="background-color: #a50044; border: none; padding: 0.5rem 1rem;">
+            <a href="login.php" class="btn btn-sm text-white" style="background-color: #a50044; border: none; padding: 0.5rem 1rem;">
               <i class="fas fa-user me-1"></i>Login
             </a>
           </span>
@@ -461,7 +464,6 @@
     </button>
     
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/auth.js"></script>
+    <script src="js/auth-php.js"></script>
   </body>
 </html>
-

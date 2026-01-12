@@ -14,7 +14,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  # 2. API (Node.js)
+  # 2. API (Node.js) - Backup/Secondary Database
   backend:
     build: ./backend
     container_name: football-site-backend
@@ -29,15 +29,41 @@ services:
       DB_PASS: rootpassword
       DB_NAME: football_db
 
-  # 3. Web Server
+  # 3. Web Server (PHP + Apache)
   website:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.php
     container_name: football-site-frontend
     restart: always
     ports:
-      - "8081:80" 
+      - "8081:80"
     volumes:
-      - ./:/usr/share/nginx/html 
+      - ./:/var/www/html
+    depends_on:
+      - db
+      - backend
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: rootpassword
+      DB_NAME: football_db
+      BACKEND_URL: http://backend:3000
+
+  # 4. phpMyAdmin (Database Management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: football-site-phpmyadmin
+    restart: always
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+    depends_on:
+      - db
 
 volumes:
   db_data:

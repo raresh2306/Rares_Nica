@@ -1,6 +1,6 @@
-// Authentication JavaScript
+// Authentication JavaScript for PHP backend
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'php'; // PHP endpoints are in the php/ directory
 
 // Check if user is already logged in on page load
 document.addEventListener('DOMContentLoaded', async () => {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Check authentication status
 async function checkAuthStatus() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/check`, {
+        const response = await fetch(`${API_BASE_URL}/auth-check.php`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -103,7 +103,7 @@ async function checkEmailAvailability(email) {
     emailCheckInProgress = true;
     
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/check-email/${encodeURIComponent(email)}`, {
+        const response = await fetch(`${API_BASE_URL}/check-email.php?email=${encodeURIComponent(email)}`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -177,7 +177,7 @@ async function handleLogin(e) {
     alertDiv.innerHTML = '';
 
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        const response = await fetch(`${API_BASE_URL}/auth-login.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -226,7 +226,7 @@ async function handleSignup(e) {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
+        const response = await fetch(`${API_BASE_URL}/auth-signup.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -268,7 +268,7 @@ async function handleSignup(e) {
 // Handle logout
 async function handleLogout() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+        const response = await fetch(`${API_BASE_URL}/auth-logout.php`, {
             method: 'POST',
             credentials: 'include'
         });
@@ -320,4 +320,3 @@ function showAuthForms() {
     if (authForms) authForms.style.display = 'block';
     if (userInfoSection) userInfoSection.style.display = 'none';
 }
-
