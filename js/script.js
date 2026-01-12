@@ -193,12 +193,13 @@ function setupFormEnhancements() {
     if (submitBtn) submitBtn.disabled = true;
 
     try {
-      // Send data to backend
-      const response = await fetch('http://localhost:3000/submit', {
+      // Send data to PHP backend
+      const response = await fetch('php/submit-inquiry.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({
           name,
           email,
