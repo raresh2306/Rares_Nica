@@ -2,7 +2,7 @@
 require_once 'php/config.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<php lang="en">`
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -219,7 +219,7 @@ require_once 'php/config.php';
   <body id="login">
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
           <img src="images/logo2.png" alt="" width="150">
         </a>
         <button
@@ -236,15 +236,15 @@ require_once 'php/config.php';
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Team
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item text-primary" href="team.html">Men's Team</a></li>
-                <li><a class="dropdown-item text-primary" href="team-women.html">Women's Team</a></li>
+                <li><a class="dropdown-item text-primary" href="team.php">Men's Team</a></li>
+                <li><a class="dropdown-item text-primary" href="team-women.php">Women's Team</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -252,18 +252,18 @@ require_once 'php/config.php';
                 Matches
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item text-primary" href="matches.html">Men's Matches</a></li>
-                <li><a class="dropdown-item text-primary" href="matches-women.html">Women's Matches</a></li>
+                <li><a class="dropdown-item text-primary" href="matches.php">Men's Matches</a></li>
+                <li><a class="dropdown-item text-primary" href="matches-women.php">Women's Matches</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="history.html">History</a>
+              <a class="nav-link" href="history.php">History</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="gallery.html">Gallery</a>
+              <a class="nav-link" href="gallery.php">Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="shopping.html">Shopping</a>
+              <a class="nav-link" href="shopping.php">Shopping</a>
             </li>
           </ul>
           <span class="nav-item d-flex align-items-center gap-2">
@@ -418,17 +418,17 @@ require_once 'php/config.php';
             <ul class="list-unstyled">
               <li class="mb-2">
                 Important: <a href="#" class="text-white-50 text-decoration-none">Terms & Conditions</a>,
-                <a href="privacy.html" class="text-white-50 text-decoration-none">Privacy Policy</a>
+                <a href="privacy.php" class="text-white-50 text-decoration-none">Privacy Policy</a>
               </li>
               <li class="mb-2">
-                Useful: <a href="gallery.html" class="text-white-50 text-decoration-none">Gallery</a>,
-                <a href="shopping.html" class="text-white-50 text-decoration-none">Shop</a>,
-                <a href="index.html#newsletter" class="text-white-50 text-decoration-none">Newsletter</a>
+                Useful: <a href="gallery.php" class="text-white-50 text-decoration-none">Gallery</a>,
+                <a href="shopping.php" class="text-white-50 text-decoration-none">Shop</a>,
+                <a href="index.php#newsletter" class="text-white-50 text-decoration-none">Newsletter</a>
               </li>
               <li class="mb-2">
-                Menu: <a href="index.html" class="text-white-50 text-decoration-none">Home</a>, 
-                <a href="team.html" class="text-white-50 text-decoration-none">Team</a>,
-                <a href="matches.html" class="text-white-50 text-decoration-none">Matches</a>,
+                Menu: <a href="index.php" class="text-white-50 text-decoration-none">Home</a>, 
+                <a href="team.php" class="text-white-50 text-decoration-none">Team</a>,
+                <a href="matches.php" class="text-white-50 text-decoration-none">Matches</a>,
               </li>
             </ul>
           </div>
@@ -466,4 +466,4 @@ require_once 'php/config.php';
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/auth-php.js"></script>
   </body>
-</html>
+</php>

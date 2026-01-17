@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/font-awesome.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="icon" href="../images/favicon.ico" />
+    <title>FC Barcelona - Andreas Christensen</title>
+  </head>
+  <body id="player-profile" data-player-slug="andreas-christensen">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="../index.php">
+          <img src="../images/logo2.png" alt="" width="150" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="../index.php">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Team
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item text-primary" href="../team.php">Men's Team</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-primary" href="../team-women.php">Women's Team</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Matches
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item text-primary" href="../matches.php">Men's Matches</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-primary" href="../matches-women.php">Women's Matches</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../history.php">History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../gallery.php">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../shopping.php">Shopping</a>
+            </li>
+          </ul>
+          <span class="nav-item d-flex align-items-center gap-2">
+            <span class="fa-stack">
+              <a href="https://facebook.com" target="_blank">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-facebook-f fa-stack-1x text-white"></i>
+              </a>
+            </span>
+            <span class="fa-stack">
+              <a href="https://twitter.com" target="_blank">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-instagram fa-stack-1x text-white"></i>
+              </a>
+            </span>
+            <a href="../login.php" class="btn btn-sm text-white" style="background-color: #a50044; border: none; padding: 0.5rem 1rem;">
+              <i class="fas fa-user me-1"></i>Login
+            </a>
+          </span>
+        </div>
+      </div>
+    </nav>
+
+    <header class="header position-relative">
+      <img
+        src="../images/vertical-decoration-left.svg"
+        alt=""
+        class="vertical-decoration position-absolute d-none d-md-block"
+      />
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-lg-10">
+            <p class="text-uppercase text-primary fw-semibold mb-2">Player profile</p>
+            <h1 class="xl-text text-secondary">
+              Andreas Christensen
+              <span class="text-primary fw-bold">#15</span>
+            </h1>
+            <p class="lead mb-0">Centre back with brilliant passing skills and a tremendous reading of the game. Fabulous and finding the right route to get the ball forward.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="playerProfileRoot"></section>
+
+    <footer class="footer bg-secondary py-6 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 my-3">
+            <h6>About FC Barcelona</h6>
+            <p>
+              FC Barcelona Fan Portal - your source for team news, fixtures,
+              tickets, and official merchandise. Follow the latest updates, buy
+              tickets, and shop for your favorite team gear.
+            </p>
+          </div>
+          <div class="col-md-4 my-3">
+            <h6>Links</h6>
+            <ul class="list-unstyled">
+              <li>
+                Important: <a href="../privacy.php">Privacy Policy</a>
+              </li>
+              <li>
+                Useful: <a href="../gallery.php">Gallery</a>,
+                <a href="../shopping.php">Shop</a>,
+                <a href="../index.php#newsletter">Newsletter</a>
+              </li>
+              <li>
+                Menu: <a href="../index.php">Home</a>,
+                <a href="../team.php">Team</a>,
+                <a href="../matches.php">Matches</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 my-3">
+            <div class="mb-4">
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-facebook fa-3x text-primary mx-2"></i>
+              </a>
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
+              </a>
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
+              </a>
+              <a href="#" class="text-decoration-none">
+                <i class="fab fa-pinterest fa-3x text-primary mx-2"></i>
+              </a>
+            </div>
+            <p>
+              We would love to hear from you
+              <a href="mailto:contact@site.com"><strong>contact@site.com</strong></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <button id="to-top" class="to-top-btn">
+      <a href="#player-profile">
+        <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i>
+      </a>
+    </button>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/playerData.js"></script>
+    <script src="../js/playerProfilePage.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
