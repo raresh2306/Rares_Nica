@@ -21,6 +21,7 @@
       <div class="container">
         <a class="navbar-brand" href="index.php">
           <img src="images/logo2.png" alt="" width="150">
+          <span class="typing-text" id="logoText">- FANS PORTAL</span>
         </a>
         <button
           class="navbar-toggler"
@@ -47,14 +48,8 @@
                 <li><a class="dropdown-item" href="team-women.php">Women's Team</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Matches
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="matches.php">Men's Matches</a></li>
-                <li><a class="dropdown-item" href="matches-women.php">Women's Matches</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="matches.php">Matches</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.php">History</a>
@@ -74,7 +69,7 @@
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -424,7 +419,7 @@
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="#" class="text-decoration-none">
+              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">
@@ -450,6 +445,43 @@
     <script src="js/replaceme.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/navbar-auth.js"></script>
+    <script>
+      // Typing animation for logo "- FANS PORTAL" text
+      document.addEventListener('DOMContentLoaded', function() {
+        const logoText = document.getElementById('logoText');
+        if (logoText) {
+          const text = '- FANS PORTAL';
+          logoText.textContent = '';
+          logoText.style.opacity = '1';
+          
+          let i = 0;
+          let showCursor = true;
+          function typeWriter() {
+            if (i < text.length) {
+              // Show current text + cursor
+              logoText.innerHTML = text.substring(0, i + 1) + (showCursor ? '<span class="typing-cursor">|</span>' : '');
+              showCursor = !showCursor; // Toggle cursor visibility
+              i++;
+              setTimeout(typeWriter, 175); // Speed of typing (175ms per character)
+            } else {
+              // After typing is complete, keep cursor blinking
+              logoText.innerHTML = text + '<span class="typing-cursor">|</span>';
+              // Remove cursor after 7 blinks (7 seconds)
+              setTimeout(() => {
+                const cursor = logoText.querySelector('.typing-cursor');
+                if (cursor) {
+                  cursor.remove();
+                }
+              }, 7000);
+            }
+          }
+          
+          // Start typing animation after a short delay
+          setTimeout(typeWriter, 500);
+        }
+      });
+    </script>
   </body>
 </html>
 

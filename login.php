@@ -2,7 +2,7 @@
 require_once 'php/config.php';
 ?>
 <!DOCTYPE html>
-<php lang="en">`
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -247,14 +247,8 @@ require_once 'php/config.php';
                 <li><a class="dropdown-item text-primary" href="team-women.php">Women's Team</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Matches
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item text-primary" href="matches.php">Men's Matches</a></li>
-                <li><a class="dropdown-item text-primary" href="matches-women.php">Women's Matches</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="matches.php">Matches</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.php">History</a>
@@ -274,7 +268,7 @@ require_once 'php/config.php';
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -440,7 +434,7 @@ require_once 'php/config.php';
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="#" class="text-decoration-none">
+              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">
@@ -459,11 +453,11 @@ require_once 'php/config.php';
     </footer>
 
     <button id="to-top" class="to-top-btn">
-      <a href="#login">
-      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> </a>
+      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> 
     </button>
     
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/auth-php.js"></script>
+    <script src="js/navbar-auth.js"></script>
   </body>
-</php>
+</html>

@@ -67,14 +67,9 @@
               >
                 Matches
               </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item text-primary" href="../matches.php">Men's Matches</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-primary" href="../matches-women.php">Women's Matches</a>
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../matches.php">Matches</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../history.php">History</a>
@@ -94,7 +89,7 @@
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -166,7 +161,7 @@
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="#" class="text-decoration-none">
+              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">
@@ -192,5 +187,6 @@
     <script src="../js/playerData.js"></script>
     <script src="../js/playerProfilePage.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/navbar-auth.js"></script>
   </body>
 </html>

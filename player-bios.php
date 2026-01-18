@@ -61,28 +61,8 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Matches
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item text-primary" href="matches.php"
-                    >Men's Matches</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item text-primary" href="matches-women.php"
-                    >Women's Matches</a
-                  >
-                </li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="matches.php">Matches</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.php">History</a>
@@ -102,7 +82,7 @@
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -121,15 +101,15 @@
         alt=""
         class="vertical-decoration position-absolute d-none d-md-block"
       />
-      <div class="container py-5">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 pt-2">
             <p class="text-uppercase text-primary fw-bold mb-2">Player Bios</p>
             <h1 class="xl-text text-secondary">
               Explore the stories behind every
               <span class="text-primary fw-bold">first-team player</span>
             </h1>
-            <p class="lead mt-3">
+            <p class="lead">
               Each profile dives deeper into the journeys, milestones, and
               playing styles of the squad. Use the quick links below or jump in
               from the modals on the team page to learn more about a player.
@@ -189,7 +169,7 @@
               <a href="#" class="text-decoration-none">
                 <i class="fab fa-twitter fa-3x text-primary mx-2"></i>
               </a>
-              <a href="#" class="text-decoration-none">
+              <a href="https://www.instagram.com/raresh.23/" class="text-decoration-none" target="_blank">
                 <i class="fab fa-instagram fa-3x text-primary mx-2"></i>
               </a>
               <a href="#" class="text-decoration-none">
@@ -217,6 +197,7 @@
     <script src="js/playerData.js"></script>
     <script src="js/playerBiosPage.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/navbar-auth.js"></script>
   </body>
 </html>
 
