@@ -130,32 +130,95 @@ async function removeFromCart(cartItemId) {
     }
 }
 
-// Submit order
+// Submit order with confirmation timer
+let submitOrderTimer = null;
+let isConfirming = false;
+
 async function submitOrder() {
-    if (!confirm('Are you sure you want to submit this order?')) {
-        return;
-    }
+    const btn = document.getElementById('submit-order-btn');
+    const btnContent = document.getElementById('submit-btn-content');
+    const timerBar = document.getElementById('timer-bar');
     
-    try {
-        const phpBasePath = getPHPBasePath();
-        const response = await fetch(phpBasePath + 'cart-submit-order.php', {
-            method: 'POST',
-            credentials: 'include'
-        });
+    // If not in confirmation state, start confirmation
+    if (!isConfirming) {
+        isConfirming = true;
+        btnContent.innerHTML = '<i class="fas fa-question-circle me-1"></i>Are you sure?';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-warning');
         
-        const data = await response.json();
+        // Show and animate timer bar
+        timerBar.style.display = 'block';
+        timerBar.style.width = '100%';
+        // Force reflow to start animation
+        void timerBar.offsetWidth;
+        timerBar.style.width = '0%';
         
-        if (data.success || response.ok) {
-            alert('Order submitted successfully! Order ID: ' + data.order_id);
-            // Reload cart (should be empty now)
-            await loadCart();
-            await updateCartBadge();
-        } else {
-            alert('Error submitting order: ' + (data.error || 'Unknown error'));
+        // Set timer to revert after 5 seconds
+        submitOrderTimer = setTimeout(() => {
+            isConfirming = false;
+            btnContent.innerHTML = '<i class="fas fa-check me-1"></i>Submit Order';
+            btn.classList.remove('btn-warning');
+            btn.classList.add('btn-primary');
+            timerBar.style.display = 'none';
+            timerBar.style.width = '100%'; // Reset for next time
+        }, 5000);
+    } else {
+        // User confirmed - submit order
+        clearTimeout(submitOrderTimer);
+        isConfirming = false;
+        btnContent.innerHTML = '<i class="fas fa-check-circle me-1"></i>Order placed successfully!';
+        btn.classList.remove('btn-warning');
+        btn.classList.add('btn-success');
+        btn.disabled = true;
+        timerBar.style.display = 'none';
+        
+        try {
+            const phpBasePath = getPHPBasePath();
+            const response = await fetch(phpBasePath + 'cart-submit-order.php', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success || response.ok) {
+                // Keep success message, reload cart
+                setTimeout(async () => {
+                    await loadCart();
+                    await updateCartBadge();
+                    // Reset button after a moment
+                    btn.disabled = false;
+                    btnContent.innerHTML = '<i class="fas fa-check me-1"></i>Submit Order';
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-primary');
+                }, 2000);
+            } else {
+                btnContent.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>Error: ' + (data.error || 'Unknown error');
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-danger');
+                btn.disabled = false;
+                
+                // Revert after 3 seconds
+                setTimeout(() => {
+                    btnContent.innerHTML = '<i class="fas fa-check me-1"></i>Submit Order';
+                    btn.classList.remove('btn-danger');
+                    btn.classList.add('btn-primary');
+                }, 3000);
+            }
+        } catch (error) {
+            console.error('Error submitting order:', error);
+            btnContent.innerHTML = '<i class="fas fa-exclamation-circle me-1"></i>Error submitting order';
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-danger');
+            btn.disabled = false;
+            
+            // Revert after 3 seconds
+            setTimeout(() => {
+                btnContent.innerHTML = '<i class="fas fa-check me-1"></i>Submit Order';
+                btn.classList.remove('btn-danger');
+                btn.classList.add('btn-primary');
+            }, 3000);
         }
-    } catch (error) {
-        console.error('Error submitting order:', error);
-        alert('Error submitting order. Please try again.');
     }
 }
 

@@ -68,7 +68,7 @@
               </a>
             </span>
             <span class="fa-stack">
-              <a href="https://twitter.com" target="_blank">
+              <a href="https://www.instagram.com/raresh.23/" target="_blank">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-instagram fa-stack-1x text-white"></i>
               </a>
@@ -127,8 +127,11 @@
                   <span>Total:</span>
                   <span class="fw-bold" id="cart-total">$0.00</span>
                 </div>
-                <button class="btn btn-primary w-100" onclick="submitOrder()" id="submit-order-btn">
-                  <i class="fas fa-check me-1"></i>Submit Order
+                <button class="btn btn-primary w-100 position-relative" onclick="submitOrder()" id="submit-order-btn" style="overflow: hidden;">
+                  <span id="submit-btn-content" style="position: relative; z-index: 1;">
+                    <i class="fas fa-check me-1"></i>Submit Order
+                  </span>
+                  <div id="timer-bar" class="position-absolute top-0 start-0 h-100 bg-success" style="width: 100%; opacity: 0.3; display: none; transition: width 5s linear; z-index: 0;"></div>
                 </button>
               </div>
             </div>

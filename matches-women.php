@@ -47,14 +47,8 @@
                 <li><a class="dropdown-item" href="team-women.php">Women's Team</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Matches
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="matches.php">Men's Matches</a></li>
-                <li><a class="dropdown-item" href="matches-women.php">Women's Matches</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link active" href="matches.php">Matches</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.php">History</a>
@@ -337,6 +331,7 @@
     <script src="js/replaceme.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/navbar-auth.js"></script>
   </body>
 </html>
 
