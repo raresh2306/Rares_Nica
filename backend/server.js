@@ -105,6 +105,37 @@ function initializeTable() {
         if (err) console.log("Error creating users table:", err);
         else console.log("Table 'users' is ready.");
     });
+
+    // Create categories table for shopping
+    const categoriesSql = `
+        CREATE TABLE IF NOT EXISTS categories (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL UNIQUE,
+            description TEXT,
+            icon_class VARCHAR(50),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`;
+    db.query(categoriesSql, err => {
+        if (err) console.log("Error creating categories table:", err);
+        else console.log("Table 'categories' is ready.");
+    });
+
+    // Create products table for shopping
+    const productsSql = `
+        CREATE TABLE IF NOT EXISTS products (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            description TEXT,
+            price DECIMAL(10,2) NOT NULL,
+            image_url VARCHAR(500),
+            category_id INT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+        )`;
+    db.query(productsSql, err => {
+        if (err) console.log("Error creating products table:", err);
+        else console.log("Table 'products' is ready.");
+    });
 }
 
 connectWithRetry();
@@ -302,6 +333,103 @@ app.post('/submit', (req, res) => {
                 res.status(200).json({ message: "Submission successful" });
             }
         });
+    });
+});
+
+// Shopping endpoints
+
+// Sync shopping data from PHP to Node.js backend
+app.post('/api/sync/shopping-data', (req, res) => {
+    const { categories, products } = req.body;
+    
+    try {
+        // Sync categories
+        if (categories && categories.length > 0) {
+            const categoryValues = categories.map(cat => [cat.id, cat.name, cat.description, cat.icon_class]);
+            const categorySql = 'INSERT IGNORE INTO categories (id, name, description, icon_class) VALUES ?';
+            db.query(categorySql, [categoryValues], (err) => {
+                if (err) console.error("Error syncing categories:", err);
+            });
+        }
+        
+        // Sync products
+        if (products && products.length > 0) {
+            const productValues = products.map(prod => [prod.id, prod.name, prod.description, prod.price, prod.image_url, prod.category_id]);
+            const productSql = 'INSERT IGNORE INTO products (id, name, description, price, image_url, category_id) VALUES ?';
+            db.query(productSql, [productValues], (err) => {
+                if (err) console.error("Error syncing products:", err);
+            });
+        }
+        
+        res.status(200).json({ message: "Shopping data synced successfully" });
+    } catch (error) {
+        console.error("Error syncing shopping data:", error);
+        res.status(500).json({ error: "Error syncing shopping data" });
+    }
+});
+
+// Get all categories
+app.get('/api/categories', (req, res) => {
+    const sql = 'SELECT * FROM categories ORDER BY name';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error("Error fetching categories:", err);
+            return res.status(500).json({ error: 'Server error' });
+        }
+        res.status(200).json(results);
+    });
+});
+
+// Get products by category (optional category_id parameter)
+app.get('/api/products', (req, res) => {
+    const categoryId = req.query.category_id;
+    
+    let sql = `
+        SELECT p.*, c.name as category_name, c.icon_class as category_icon 
+        FROM products p 
+        LEFT JOIN categories c ON p.category_id = c.id
+    `;
+    
+    const params = [];
+    
+    if (categoryId) {
+        sql += ' WHERE p.category_id = ?';
+        params.push(categoryId);
+    }
+    
+    sql += ' ORDER BY p.name';
+    
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.error("Error fetching products:", err);
+            return res.status(500).json({ error: 'Server error' });
+        }
+        res.status(200).json(results);
+    });
+});
+
+// Get single product by ID
+app.get('/api/products/:id', (req, res) => {
+    const productId = req.params.id;
+    
+    const sql = `
+        SELECT p.*, c.name as category_name, c.icon_class as category_icon 
+        FROM products p 
+        LEFT JOIN categories c ON p.category_id = c.id 
+        WHERE p.id = ?
+    `;
+    
+    db.query(sql, [productId], (err, results) => {
+        if (err) {
+            console.error("Error fetching product:", err);
+            return res.status(500).json({ error: 'Server error' });
+        }
+        
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        
+        res.status(200).json(results[0]);
     });
 });
 

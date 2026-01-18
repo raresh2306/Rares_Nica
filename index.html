@@ -47,6 +47,7 @@
                 <li><a class="dropdown-item text-primary" href="team-women.html">Women's Team</a></li>
               </ul>
             </li>
+<<<<<<< Updated upstream:index.html
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Matches
@@ -55,6 +56,10 @@
                 <li><a class="dropdown-item text-primary" href="matches.html">Men's Matches</a></li>
                 <li><a class="dropdown-item text-primary" href="matches-women.html">Women's Matches</a></li>
               </ul>
+=======
+            <li class="nav-item">
+              <a class="nav-link" href="matches.php">Matches</a>
+>>>>>>> Stashed changes:index.php
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.html">History</a>
@@ -341,8 +346,7 @@
     </footer>
 
     <button id="to-top" class="to-top-btn">
-      <a href="#home">
-      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> </a>
+      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> 
     </button>
 
     <!-- Cookie Consent Modal -->
@@ -395,5 +399,29 @@
     <script src="js/replaceme.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+    
+    <script>
+        // Enhanced smooth scroll for to-top button
+        document.addEventListener('DOMContentLoaded', function() {
+            const toTopBtn = document.getElementById('to-top');
+            if (toTopBtn) {
+                toTopBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Use multiple smooth scroll methods for maximum compatibility
+                    if (window.scrollTo) {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else if (document.documentElement.scrollTop) {
+                        document.documentElement.scrollTop = 0;
+                    } else {
+                        document.body.scrollTop = 0;
+                    }
+                });
+            }
+        });
+    </script>
   </body>
 </html> 

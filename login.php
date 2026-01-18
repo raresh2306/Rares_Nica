@@ -247,6 +247,7 @@ require_once 'php/config.php';
                 <li><a class="dropdown-item text-primary" href="team-women.html">Women's Team</a></li>
               </ul>
             </li>
+<<<<<<< Updated upstream
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Matches
@@ -255,6 +256,10 @@ require_once 'php/config.php';
                 <li><a class="dropdown-item text-primary" href="matches.html">Men's Matches</a></li>
                 <li><a class="dropdown-item text-primary" href="matches-women.html">Women's Matches</a></li>
               </ul>
+=======
+            <li class="nav-item">
+              <a class="nav-link" href="matches.php">Matches</a>
+>>>>>>> Stashed changes
             </li>
             <li class="nav-item">
               <a class="nav-link" href="history.html">History</a>
@@ -459,8 +464,7 @@ require_once 'php/config.php';
     </footer>
 
     <button id="to-top" class="to-top-btn">
-      <a href="#login">
-      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> </a>
+      <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> 
     </button>
     
     <script src="js/bootstrap.bundle.min.js"></script>

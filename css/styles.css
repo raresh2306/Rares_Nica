@@ -575,3 +575,34 @@ body[data-player-slug="gerard-martin"] #playerProfileRoot img {
 .testimonial-card .card-img-top {
   border-radius: 13px 13px 0 0 !important;
 }
+
+/* Navbar icon alignment - ensure all fa-stack icons are properly centered */
+.nav-item.d-flex.align-items-center .fa-stack {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Use fa-stack itself as positioning context for badge */
+  margin-top: -32px; /* Move icons up (-25px + 7px more) */
+}
+
+/* Ensure all fa-stack links have consistent styling - override any position-relative classes */
+.nav-item.d-flex.align-items-center .fa-stack > a {
+  display: block !important;
+  text-align: center;
+  line-height: 1;
+  position: static !important; /* Force remove any positioning from the link itself */
+  margin: 0;
+  padding: 0;
+}
+
+/* Move the icons inside the circular backgrounds down by 8px */
+.nav-item.d-flex.align-items-center .fa-stack .fa-stack-1x {
+  transform: translateY(8px);
+}
+
+/* Cart badge positioning - position relative to fa-stack, not the link */
+.nav-item .fa-stack .position-absolute {
+  pointer-events: none;
+  z-index: 10;
+}
