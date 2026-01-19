@@ -19,7 +19,8 @@ if (typeof globalThis.fetch !== 'undefined') {
 // --- CONFIGURATION ---
 const API_TOKEN = 'b561a4a6f36944a4acb7938bc08017b1'; // <--- PASTE YOUR KEY HERE
 const TEAM_ID = 81; // FC Barcelona
-const FILE_PATH = 'matches.html';
+// Update the PHP page directly
+const FILE_PATH = 'matches.php';
 const FINISHED_URL = `https://api.football-data.org/v4/teams/${TEAM_ID}/matches?status=FINISHED&limit=10`;
 const UPCOMING_URL = `https://api.football-data.org/v4/teams/${TEAM_ID}/matches?status=SCHEDULED&limit=10`;
 
@@ -248,7 +249,7 @@ async function updateMatches() {
         }
 
         fs.writeFileSync(FILE_PATH, fileContent, 'utf8');
-        console.log("Success! matches.html has been updated with:");
+        console.log("Success! matches.php has been updated with:");
         console.log(`  - ${latestMatches.length} recent results`);
         console.log(`  - ${upcomingMatches.length} upcoming matches`);
 

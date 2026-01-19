@@ -127,19 +127,19 @@
                       </div>
                       <div class="col-4 text-center">
                         <h5 class="text-primary">vs</h5>
-                        <p class="mb-1"><strong>Real Sociedad de Fútbol</strong></p>
-                        <small class="text-muted">Primera Division</small>
+                        <p class="mb-1"><strong>SK Slavia Praha</strong></p>
+                        <small class="text-muted">UEFA Champions League</small>
                       </div>
                       <div class="col-4 text-center">
-                        <img src="https://crests.football-data.org/92.png" alt="Real Sociedad de Fútbol" class="img-fluid" style="max-height: 60px;">
-                        <h6 class="mt-2">Real Sociedad de Fútbol</h6>
+                        <img src="https://crests.football-data.org/930.png" alt="SK Slavia Praha" class="img-fluid" style="max-height: 60px;">
+                        <h6 class="mt-2">SK Slavia Praha</h6>
                       </div>
                     </div>
                     <hr>
                     <div class="text-center">
-                      <p class="mb-1"><strong>Primera Division</strong></p>
-                      <p class="mb-1">Sunday, January 18, 2026</p>
-                      <p class="mb-1">10:00 PM</p>
+                      <p class="mb-1"><strong>UEFA Champions League</strong></p>
+                      <p class="mb-1">Wednesday, January 21, 2026</p>
+                      <p class="mb-1">10:00 PM GMT+2</p>
                       <p class="mb-0">Away</p>
                       <a href="#" class="btn btn-primary btn-sm mt-2">Buy Tickets</a>
                     </div>
@@ -156,20 +156,20 @@
                       </div>
                       <div class="col-4 text-center">
                         <h5 class="text-primary">vs</h5>
-                        <p class="mb-1"><strong>SK Slavia Praha</strong></p>
-                        <small class="text-muted">UEFA Champions League</small>
+                        <p class="mb-1"><strong>Real Oviedo</strong></p>
+                        <small class="text-muted">Primera Division</small>
                       </div>
                       <div class="col-4 text-center">
-                        <img src="https://crests.football-data.org/930.png" alt="SK Slavia Praha" class="img-fluid" style="max-height: 60px;">
-                        <h6 class="mt-2">SK Slavia Praha</h6>
+                        <img src="https://crests.football-data.org/1048.png" alt="Real Oviedo" class="img-fluid" style="max-height: 60px;">
+                        <h6 class="mt-2">Real Oviedo</h6>
                       </div>
                     </div>
                     <hr>
                     <div class="text-center">
-                      <p class="mb-1"><strong>UEFA Champions League</strong></p>
-                      <p class="mb-1">Wednesday, January 21, 2026</p>
-                      <p class="mb-1">10:00 PM</p>
-                      <p class="mb-0">Away</p>
+                      <p class="mb-1"><strong>Primera Division</strong></p>
+                      <p class="mb-1">Sunday, January 25, 2026</p>
+                      <p class="mb-1">05:15 PM GMT+2</p>
+                      <p class="mb-0">Camp Nou, Barcelona</p>
                       <a href="#" class="btn btn-primary btn-sm mt-2">Buy Tickets</a>
                     </div>
                   </div>
@@ -191,6 +191,31 @@
             <div class="row">
               <!-- AUTO-GENERATED MATCHES START -->
 
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-4 text-center">
+                    <img src="https://crests.football-data.org/81.png" alt="FC Barcelona" class="img-fluid" style="max-height: 50px;">
+                    <h6 class="mt-1">FC Barcelona</h6>
+                  </div>
+                  <div class="col-4 text-center">
+                    <h4 class="text-danger mb-0">1-2</h4>
+                    <small class="text-muted">Lost</small>
+                  </div>
+                  <div class="col-4 text-center">
+                    <img src="https://crests.football-data.org/92.png" alt="Real Sociedad de Fútbol" class="img-fluid" style="max-height: 50px;">
+                    <h6 class="mt-1">Real Sociedad de Fútbol</h6>
+                  </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <p class="mb-1"><strong>Primera Division</strong></p>
+                  <p class="mb-0">January 18, 2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
               <div class="card-body">
@@ -237,31 +262,6 @@
                 <div class="text-center">
                   <p class="mb-1"><strong>Primera Division</strong></p>
                   <p class="mb-0">December 21, 2025</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <div class="card-body">
-                <div class="row align-items-center">
-                  <div class="col-4 text-center">
-                    <img src="https://crests.football-data.org/81.png" alt="FC Barcelona" class="img-fluid" style="max-height: 50px;">
-                    <h6 class="mt-1">FC Barcelona</h6>
-                  </div>
-                  <div class="col-4 text-center">
-                    <h4 class="text-success mb-0">2-0</h4>
-                    <small class="text-muted">Won</small>
-                  </div>
-                  <div class="col-4 text-center">
-                    <img src="https://crests.football-data.org/79.png" alt="CA Osasuna" class="img-fluid" style="max-height: 50px;">
-                    <h6 class="mt-1">CA Osasuna</h6>
-                  </div>
-                </div>
-                <hr>
-                <div class="text-center">
-                  <p class="mb-1"><strong>Primera Division</strong></p>
-                  <p class="mb-0">December 13, 2025</p>
                 </div>
               </div>
             </div>
