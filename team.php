@@ -831,32 +831,45 @@
       <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> </a>
     </button>
 
-    <script src="js/replaceme.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/navbar-auth.js"></script>
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE -->
+    <script src="js/replaceme.min.js"></script>     <!-- Pentru animații de text -->
+    <script src="js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI -->
+    <script src="js/script.js"></script>              <!-- Script principal pentru funcționalități generale -->
+    <script src="js/navbar-auth.js"></script>          <!-- Actualizare dinamică navbar login/logout -->
+    
+    <!-- SCRIPT ANIMAȚIE LOGO - EFECT VISUAL DINAMIC -->
     <script>
-      // Typing animation for logo "- FANS PORTAL" text
+      /**
+       * ANIMAȚIE TYPING PENTRU LOGO "- FANS PORTAL"
+       * Creează un efect de scriere automată pentru textul logo-ului
+       * Include cursor care clipește și eliminare automat după 7 secunde
+       */
       document.addEventListener('DOMContentLoaded', function() {
         const logoText = document.getElementById('logoText');
         if (logoText) {
-          const text = '- FANS PORTAL';
-          logoText.textContent = '';
-          logoText.style.opacity = '1';
+          const text = '- FANS PORTAL';        // Textul de afișat
+          logoText.textContent = '';            // Golim elementul la început
+          logoText.style.opacity = '1';         // Asigurăm vizibilitatea
           
-          let i = 0;
-          let showCursor = true;
+          let i = 0;                           // Index pentru caracterul curent
+          let showCursor = true;               // Flag pentru cursorul care clipește
+          
+          /**
+           * FUNCȚIA PRINCIPALĂ DE TYPING
+           * Adaugă caractere unul câte unul cu efect de cursor care clipește
+           */
           function typeWriter() {
             if (i < text.length) {
-              // Show current text + cursor
+              // Afișăm textul până la caracterul curent + cursor (dacă e vizibil)
               logoText.innerHTML = text.substring(0, i + 1) + (showCursor ? '<span class="typing-cursor">|</span>' : '');
-              showCursor = !showCursor; // Toggle cursor visibility
+              showCursor = !showCursor; // Inversăm vizibilitatea cursorului pentru efect de clipire
               i++;
-              setTimeout(typeWriter, 175); // Speed of typing (175ms per character)
+              setTimeout(typeWriter, 175); // Viteză de typing: 175ms per caracter
             } else {
-              // After typing is complete, keep cursor blinking
+              // După ce s-a terminat scrierea, menținem cursorul care clipește
               logoText.innerHTML = text + '<span class="typing-cursor">|</span>';
-              // Remove cursor after 7 blinks (7 seconds)
+              
+              // Eliminăm cursorul după 7 secunde (7 blinks)
               setTimeout(() => {
                 const cursor = logoText.querySelector('.typing-cursor');
                 if (cursor) {
@@ -866,7 +879,11 @@
             }
           }
           
-          // Start typing animation after a short delay
+          // Pornim animația după un scurt delay pentru efect dramatic
+          setTimeout(typeWriter, 500);
+        }
+      });
+    </script>
           setTimeout(typeWriter, 500);
         }
       });

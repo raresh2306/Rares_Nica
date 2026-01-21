@@ -456,8 +456,9 @@ require_once 'php/config.php';
       <i class="fa-solid fa-hand-point-up fa-2x icon-white"></i> 
     </button>
     
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/auth-php.js"></script>
-    <script src="js/navbar-auth.js"></script>
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE DE AUTENTIFICARE -->
+    <script src="js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI (modale, alerte) -->
+    <script src="js/auth-php.js"></script>              <!-- Script principal pentru autentificare (login, signup, logout) -->
+    <script src="js/navbar-auth.js"></script>          <!-- Actualizare dinamică navbar login/logout -->
   </body>
 </html>

@@ -196,10 +196,11 @@
       </div>
     </footer>
 
-    <script src="js/replaceme.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/navbar-auth.js"></script>
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE ALE COȘULUI DE CUMPĂRĂTURI -->
+    <script src="js/replaceme.min.js"></script>     <!-- Pentru animații de text -->
+    <script src="js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI -->
+    <script src="js/script.js"></script>              <!-- Script principal pentru funcționalități generale -->
+    <script src="js/cart.js"></script>                <!-- Gestionare completă coș de cumpărături (afișare, adăugare, ștergere, trimitere comenzi) -->
+    <script src="js/navbar-auth.js"></script>          <!-- Actualizare dinamică navbar login/logout -->
   </body>
 </html>

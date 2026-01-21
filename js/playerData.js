@@ -1,4 +1,24 @@
- (function (root, factory) {
+ /**
+ * DATE STATICE PENTRU JUCĂTORI - STRUCTURĂ DE DATE DINAMICĂ
+ * 
+ * Acest fișier conține datele complete pentru toți jucătorii FC Barcelona
+ * Folosit pentru a popula dinamic paginile de profil ale jucătorilor
+ * Include informații personale, statistici, biografii și imagini
+ * 
+ * Structura datelor pentru fiecare jucător:
+ * - id: Identificator unic pentru elemente DOM
+ * - slug: URL slug pentru pagini individuale
+ * - name: Numele complet al jucătorului
+ * - position: Poziția în teren
+ * - number: Numărul pe tricou
+ * - matches: Număr total de meciuri jucate
+ * - stats: Array de statistici cheie (label, value)
+ * - image: URL către imaginea oficială
+ * - detail: Descriere scurtă a jucătorului
+ * - bio: Array cu biografia detaliată
+ */
+
+(function (root, factory) {
    if (typeof module === 'object' && module.exports) {
      module.exports = factory();
    } else {

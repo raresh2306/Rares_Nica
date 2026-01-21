@@ -183,10 +183,11 @@
       </a>
     </button>
 
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/playerData.js"></script>
-    <script src="../js/playerProfilePage.js"></script>
-    <script src="../js/script.js"></script>
-    <script src="../js/navbar-auth.js"></script>
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE PENTRU JUCĂTORI -->
+    <script src="../js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI -->
+    <script src="../js/playerData.js"></script>              <!-- Date și statistici jucători (încărcare dinamică) -->
+    <script src="../js/playerProfilePage.js"></script>      <!-- Funcționalități specifice paginii de profil jucător -->
+    <script src="../js/script.js"></script>                   <!-- Script principal pentru funcționalități generale -->
+    <script src="../js/navbar-auth.js"></script>             <!-- Actualizare dinamică navbar login/logout -->
   </body>
 </html>
