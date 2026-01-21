@@ -1,6 +1,9 @@
 // Cart functionality JavaScript
+// Acest fisier gestioneaza functionalitatea cosului de cumparaturi
+// Include operatiuni pentru adaugarea, stergerea si afisarea produselor din cos
 
-// Update cart badge in navbar
+// Actualizeaza badge-ul cu numarul de articole din cos in bara de navigare
+// Functia face un request AJAX catre server pentru a obtine numarul total de articole
 async function updateCartBadge() {
     try {
         const phpBasePath = getPHPBasePath();
@@ -17,7 +20,8 @@ async function updateCartBadge() {
             }
         }
     } catch (error) {
-        // Silently fail if not authenticated
+        // In caz de eroare (de obicei daca user-ul nu e autentificat),
+        // ascundem badge-ul fara sa afisam erori vizibile
         const badge = document.getElementById('cart-badge');
         if (badge) {
             badge.style.display = 'none';
@@ -25,13 +29,15 @@ async function updateCartBadge() {
     }
 }
 
-// Get PHP base path based on page location
+// Determina calea catre fisierele PHP in functie de pagina curenta
+// Folosim aceasta functie pentru ca paginile player au o structura de directoare diferita
 function getPHPBasePath() {
     const isPlayerPage = window.location.pathname.includes('/players/');
     return isPlayerPage ? '../php/' : 'php/';
 }
 
-// Load and display cart items
+// Incarca si afiseaza articolele din cos prin AJAX
+// Face request catre cart-get.php pentru a obtine datele cosului
 async function loadCart() {
     try {
         const phpBasePath = getPHPBasePath();
@@ -45,19 +51,27 @@ async function loadCart() {
     }
 }
 
-// Display cart items
+// Afiseaza articolele din cos in interfata utilizatorului
+// Primeste datele cosului si genereaza HTML-ul dinamic pentru fiecare articol
 function displayCart(data) {
+    // Selectam elementele DOM pentru cos, total si mesajul de cos gol
     const cartContainer = document.getElementById('cart-items-container');
     const cartTotal = document.getElementById('cart-total');
     const emptyCartMsg = document.getElementById('empty-cart-message');
-    
+
+    // Daca container-ul nu exista, iesim din functie
     if (!cartContainer) return;
-    
+
+    // Daca avem articole in cos, le afisam
     if (data.cart && data.cart.length > 0) {
+        // Ascundem mesajul de cos gol si golim container-ul
         if (emptyCartMsg) emptyCartMsg.style.display = 'none';
         cartContainer.innerHTML = '';
-        
+
+        // Parcurgem fiecare articol din cos si generam HTML-ul
         data.cart.forEach(item => {
+            // Generam HTML-ul pentru fiecare articol din cos folosind template literals
+            // Include imagine, nume, descriere, cantitate, pret si buton de stergere
             const cartItemHtml = `
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -98,8 +112,10 @@ function displayCart(data) {
     }
 }
 
-// Remove item from cart
+// Sterge un articol din cos dupa ID-ul articolului din cos
+// Include confirmare de la utilizator si actualizeaza interfata dupa stergere
 async function removeFromCart(cartItemId) {
+    // Confirmam actiunea cu utilizatorul inainte de stergere
     if (!confirm('Are you sure you want to remove this item from your cart?')) {
         return;
     }
@@ -130,30 +146,34 @@ async function removeFromCart(cartItemId) {
     }
 }
 
-// Submit order with confirmation timer
-let submitOrderTimer = null;
-let isConfirming = false;
+// Sistem de trimitere comanda cu confirmare temporizata
+// Utilizatorul trebuie sa confirme de 2 ori: prima data pentru a intra in modul confirmare,
+// a doua oara in timp de 5 secunde pentru a trimite comanda efectiv
+let submitOrderTimer = null; // Timer pentru revenirea la starea initiala
+let isConfirming = false; // Flag pentru starea de confirmare
 
 async function submitOrder() {
+    // Selectam elementele DOM pentru buton si bara de timp
     const btn = document.getElementById('submit-order-btn');
     const btnContent = document.getElementById('submit-btn-content');
     const timerBar = document.getElementById('timer-bar');
-    
-    // If not in confirmation state, start confirmation
+
+    // Daca nu suntem in modul confirmare, intram in el
     if (!isConfirming) {
+        // Setam starea de confirmare si schimbam aspectul butonului
         isConfirming = true;
         btnContent.innerHTML = '<i class="fas fa-question-circle me-1"></i>Are you sure?';
         btn.classList.remove('btn-primary');
         btn.classList.add('btn-warning');
-        
-        // Show and animate timer bar
+
+        // Afisam si animam bara de timp pentru feedback vizual
         timerBar.style.display = 'block';
         timerBar.style.width = '100%';
-        // Force reflow to start animation
+        // Fortam reflow pentru a porni animatia CSS
         void timerBar.offsetWidth;
         timerBar.style.width = '0%';
-        
-        // Set timer to revert after 5 seconds
+
+        // Setam timer de 5 secunde pentru revenirea la starea initiala
         submitOrderTimer = setTimeout(() => {
             isConfirming = false;
             btnContent.innerHTML = '<i class="fas fa-check me-1"></i>Submit Order';

@@ -691,26 +691,35 @@
       </div>
     </div>
 
-    <script src="js/replaceme.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/navbar-auth.js"></script>
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE -->
+    <!-- Biblioteci externe și framework-uri -->
+    <script src="js/replaceme.min.js"></script>     <!-- Pentru animații de text -->
+    <script src="js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI -->
+    <script src="js/script.js"></script>              <!-- Script principal pentru funcționalități generale -->
+    
+    <!-- SCRIPTURI PERSONALIZATE PENTRU FUNCȚIONALITĂȚI DINAMICE -->
+    <script src="js/cart.js"></script>                <!-- Gestionare coș de cumpărături (adăugare, ștergere, afișare) -->
+    <script src="js/navbar-auth.js"></script>          <!-- Actualizare dinamică navbar login/logout -->
     
     <script>
-        // Setup cart functionality
+        /**
+         * CONFIGURARE FUNCȚIONALITATE COȘ DE CUMPĂRĂTURI
+         * Această funcție gestionează interacțiunile cu butoanele "Add to Cart"
+         * Include verificare autentificare, căutare produse în baza de date și adăugare în coș
+         */
         function setupCartFunctionality() {
-            // Get all "Add to Cart" buttons
+            // Selectăm toate butoanele de tip "Add to Cart" din pagină
             const addToCartButtons = document.querySelectorAll('.btn-primary');
             
             addToCartButtons.forEach(button => {
-                // Check if this is an "Add to Cart" button
+                // Verificăm dacă butonul este pentru adăugare în coș (după text)
                 if (button.textContent.trim().toLowerCase().includes('add to cart')) {
+                    // Adăugăm event listener pentru click pe butonul de adăugare în coș
                     button.addEventListener('click', async function(e) {
-                        e.preventDefault();
+                        e.preventDefault(); // Prevenim comportamentul default al butonului
                         
-                        // Get product name from card title - find the .card-body that contains this button
-                        const cardBody = this.closest('.card-body');
+                        // EXTRAGERE NUME PRODUS - Identificăm produsul din card-ul curent
+                        const cardBody = this.closest('.card-body'); // Găsim card-body părinte
                         const productName = cardBody ? cardBody.querySelector('.card-title')?.textContent.trim() : '';
                         
                         if (!productName) {
@@ -718,24 +727,26 @@
                             return;
                         }
                         
-                        // Check authentication
+                        // VERIFICARE AUTENTIFICARE - Verificăm dacă utilizatorul este logat
                         try {
+                            // Facem request către auth-check.php pentru a verifica starea de autentificare
                             const authResponse = await fetch('php/auth-check.php');
                             const authData = await authResponse.json();
                             
                             if (!authData.authenticated) {
-                                // User not logged in - show custom modal
+                                // UTILIZATOR NU ESTE LOGAT - Afișăm modal de login personalizat
                                 const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
                                 loginModal.show();
                                 
-                                // Handle login button click in modal
+                                // Configurăm butonul din modal pentru a redirecționa către login
                                 document.getElementById('goToLoginBtn').onclick = function() {
                                     window.location.href = 'login.php';
                                 };
-                                return;
+                                return; // Oprim execuția dacă utilizatorul nu e logat
                             }
                             
-                            // Get product ID by name
+                            // CAUTARE PRODUS ÎN BAZA DE DATE - Obținem ID-ul produsului după nume
+                            // Facem request către get-product-id.php pentru a găsi produsul în baza de date
                             const productIdResponse = await fetch('php/get-product-id.php', {
                                 method: 'POST',
                                 headers: {
@@ -747,52 +758,58 @@
                             const productIdData = await productIdResponse.json();
                             
                             if (!productIdResponse.ok || !productIdData.product_id) {
+                                // PRODUS NU A FOST GĂSIT - Afișăm eroare detaliată
                                 const errorMsg = productIdData.error || 'Product not found in database';
                                 console.error('Product ID lookup failed:', errorMsg, 'Product name:', productName);
                                 alert('Error: ' + errorMsg + '. Product: "' + productName + '"');
                                 return;
                             }
                             
-                            // Add to cart
+                            // ADAUGARE PRODUS ÎN COȘ - Trimitem request către cart-add.php
+                            // Folosim credentials: 'include' pentru a trimite cookie-urile de sesiune
                             const addResponse = await fetch('php/cart-add.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                credentials: 'include',
+                                credentials: 'include', // Important pentru autentificare
                                 body: JSON.stringify({ 
-                                    productId: productIdData.product_id,
-                                    quantity: 1
+                                    productId: productIdData.product_id, // ID-ul obținut din baza de date
+                                    quantity: 1 // Cantitate fixă de 1 produs
                                 })
                             });
                             
                             const addData = await addResponse.json();
                             
                             if (addResponse.ok && addData.success) {
-                                // Store original button state
+                                // PRODUS ADĂUGAT CU SUCCES - Actualizăm UI-ul
+                                
+                                // Salvăm starea originală a butonului pentru a o restaura mai târziu
                                 const originalText = this.textContent.trim();
                                 const originalClasses = this.className;
                                 
-                                // Change button to green "Added" state
+                                // Schimbăm butonul în starea "Added" (verde, dezactivat)
                                 this.textContent = 'Added';
                                 this.className = 'btn btn-success';
                                 this.disabled = true;
                                 
-                                // Update cart badge
+                                // ACTUALIZARE BADGE COȘ - Apelăm funcția din cart.js pentru a actualiza numărul de articole
                                 if (typeof updateCartBadge === 'function') {
-                                    await updateCartBadge();
+                                    await updateCartBadge(); // Funcție definită în cart.js
                                 }
                                 
-                                // Revert button after 2 seconds
+                                // RESTAURARE BUTON - Revenim la starea originală după 2 secunde
                                 setTimeout(() => {
                                     this.textContent = originalText;
                                     this.className = originalClasses;
                                     this.disabled = false;
                                 }, 2000);
                             } else {
+                                // EROARE ADAUGARE ÎN COȘ - Afișăm mesaj de eroare
                                 alert('Error adding to cart: ' + (addData.error || 'Unknown error'));
                             }
                         } catch (error) {
+                            // EROARE GENERALĂ - Tratăm erorile de rețea sau server
                             console.error('Error adding to cart:', error);
                             alert('Error adding to cart. Please try again.');
                         }
@@ -801,31 +818,46 @@
             });
         }
         
-        // Category filtering functionality
+        /**
+         * FUNCȚIONALITATE FILTRARE CATEGORII
+         * Permite utilizatorilor să filtreze produsele după categorii
+         * Include animații de scroll și afișare condiționată
+         */
         function setupCategoryFiltering() {
+            // Selectăm elementele necesare pentru filtrare
             const categoryCards = document.querySelectorAll('.category-card, .category-filter-btn');
             const productItems = document.querySelectorAll('.product-item');
             const showAllBtn = document.querySelector('.show-all-btn');
             const productsSection = document.getElementById('products-section');
             
+            /**
+             * Funcție principală de filtrare după categorie
+             * @param {string} category - Categoria selectată sau null pentru "Show All"
+             */
             function filterByCategory(category) {
+                // Parcurgem toate produsele și le afișăm/ascundem în funcție de categorie
                 productItems.forEach(product => {
                     const productCategory = product.getAttribute('data-category');
                     if (category && productCategory === category) {
+                        // Produsul aparține categoriei selectate - îl afișăm
                         product.style.display = '';
                     } else if (category) {
+                        // Produsul nu aparține categoriei selectate - îl ascundem
                         product.style.display = 'none';
                     } else {
+                        // "Show All" - afișăm toate produsele
                         product.style.display = '';
                     }
                 });
                 
-                // Scroll to products section with offset for navbar
+                // SCROLL AUTOMAT CĂTRE SECȚIUNEA PRODUSELOR
+                // Facem scroll smooth către secțiunea de produse cu offset pentru navbar
                 if (productsSection) {
-                    const offset = 100; // Offset for navbar
+                    const offset = 100; // Offset pentru a nu acoperi conținutul cu navbar-ul
                     const elementPosition = productsSection.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - offset;
                     
+                    // Scroll smooth cu animație
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
@@ -833,56 +865,74 @@
                 }
             }
             
-            // Category cards and buttons
+            // EVENT LISTENER PENTRU CARDS DE CATEGORII
+            // Adăugăm click handlers pe card-urile de categorii pentru filtrare
             categoryCards.forEach(card => {
                 card.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const category = this.getAttribute('data-category');
-                    filterByCategory(category);
+                    const category = this.getAttribute('data-category'); // Obținem categoria din data attribute
+                    filterByCategory(category); // Aplicăm filtrarea
                 });
             });
             
-            // Show All button
+            // BUTON "SHOW ALL" - Resetare filtrare
             if (showAllBtn) {
-                showAllBtn.addEventListener('click', function(e) {
+                showAll.addEventListener('click', function(e) {
                     e.preventDefault();
-                    filterByCategory(null); // null means show all
+                    filterByCategory(null); // null înseamnă "arată tot"
                 });
             }
         }
         
-        // Initialize on page load
+        /**
+         * INIȚIALIZARE LA ÎNCĂRCAREA PAGINII
+         * Configurăm toate funcționalitățile dinamice când pagina este complet încărcată
+         */
         document.addEventListener('DOMContentLoaded', function() {
-            setupCartFunctionality();
-            setupCategoryFiltering();
-            // Update cart badge on load
+            setupCartFunctionality();      // Inițializăm funcționalitatea de coș de cumpărături
+            setupCategoryFiltering();      // Inițializăm filtrarea pe categorii
+            
+            // ACTUALIZARE BADGE COȘ - Verificăm numărul de articole din coș la încărcarea paginii
+            // Apelăm funcția din cart.js pentru a afișa numărul corect de articole
             if (typeof updateCartBadge === 'function') {
                 updateCartBadge();
             }
         });
     </script>
+    
+    <!-- SCRIPT ANIMAȚIE LOGO - EFECT VISUAL DINAMIC -->
     <script>
-      // Typing animation for logo "- FANS PORTAL" text
+      /**
+       * ANIMAȚIE TYPING PENTRU LOGO "- FANS PORTAL"
+       * Creează un efect de scriere automată pentru textul logo-ului
+       * Include cursor care clipește și eliminare automat după 7 secunde
+       */
       document.addEventListener('DOMContentLoaded', function() {
         const logoText = document.getElementById('logoText');
         if (logoText) {
-          const text = '- FANS PORTAL';
-          logoText.textContent = '';
-          logoText.style.opacity = '1';
+          const text = '- FANS PORTAL';        // Textul de afișat
+          logoText.textContent = '';            // Golim elementul la început
+          logoText.style.opacity = '1';         // Asigurăm vizibilitatea
           
-          let i = 0;
-          let showCursor = true;
+          let i = 0;                           // Index pentru caracterul curent
+          let showCursor = true;               // Flag pentru cursorul care clipește
+          
+          /**
+           * FUNCȚIA PRINCIPALĂ DE TYPING
+           * Adaugă caractere unul câte unul cu efect de cursor care clipește
+           */
           function typeWriter() {
             if (i < text.length) {
-              // Show current text + cursor
+              // Afișăm textul până la caracterul curent + cursor (dacă e vizibil)
               logoText.innerHTML = text.substring(0, i + 1) + (showCursor ? '<span class="typing-cursor">|</span>' : '');
-              showCursor = !showCursor; // Toggle cursor visibility
+              showCursor = !showCursor; // Inversăm vizibilitatea cursorului pentru efect de clipire
               i++;
-              setTimeout(typeWriter, 175); // Speed of typing (175ms per character)
+              setTimeout(typeWriter, 175); // Viteză de typing: 175ms per caracter
             } else {
-              // After typing is complete, keep cursor blinking
+              // După ce s-a terminat scrierea, menținem cursorul care clipește
               logoText.innerHTML = text + '<span class="typing-cursor">|</span>';
-              // Remove cursor after 7 blinks (7 seconds)
+              
+              // Eliminăm cursorul după 7 secunde (7 blinks)
               setTimeout(() => {
                 const cursor = logoText.querySelector('.typing-cursor');
                 if (cursor) {
@@ -892,7 +942,11 @@
             }
           }
           
-          // Start typing animation after a short delay
+          // Pornim animația după un scurt delay pentru efect dramatic
+          setTimeout(typeWriter, 500);
+        }
+      });
+    </script>
           setTimeout(typeWriter, 500);
         }
       });

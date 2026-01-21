@@ -215,13 +215,15 @@
                 
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Form Area -->
-     <section id="contact" class="contact my-6">
+    <!-- FORMULAR DE CONTACT - FUNCȚIONALITATE DINAMICĂ DE INQUIRY -->
+    <!--
+      Acest formular de contact permite utilizatorilor să trimită o solicitare de informații.
+      Funcționalitatea dinamică este implementată prin intermediul JavaScript și trimite datele către un script PHP.
+    -->
+    <section id="contact" class="contact my-6">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -229,32 +231,44 @@
             <hr class="hr-heading" />
             <p class="lead">We provide innovative software solutions that empower businesses to
               thrive in the digital era.</p>
-              <ul class="list-unstyled lh-lg">
-                <li class="d-flex align-items-center">
-                  <i class="fa fa-check fa-2x text-primary mx-3"></i>
-                    <div>
-                      <strong>Customized Solutions:</strong>  Our solutions are designed
-                      to meet your specific business needs, ensuring maximum efficiency
-                      and productivity.
-                    </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <i class="fas fa-check fa-2x text-primary mx-3 mt-3"></i>
-                  <div class="mt-3">
-                    <strong>Seamless Integration:</strong> We seamlessly integrate our
-                    software with your existing systems, minimizing disruptions and
-                    optimizing workflows.
-                  </div>
-                </li>
-              </ul>
+            
+            <!-- Informații de contact și beneficii -->
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <span class="fa-stack fa-1x">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-phone fa-stack-1x text-white"></i>
+                </span>
+                <span class="ms-3">Call us at: <strong>+1 234 567 890</strong></span>
+              </li>
+              <li class="mb-3">
+                <span class="fa-stack fa-1x">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-envelope fa-stack-1x text-white"></i>
+                </span>
+                <span class="ms-3">Email: <strong>contact@site.com</strong></span>
+              </li>
+              <li class="mb-3">
+                <span class="fa-stack fa-1x">
+                  <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                  <i class="fas fa-map-marker-alt fa-stack-1x text-white"></i>
+                </span>
+                <span class="ms-3">Address: <strong>Barcelona, Spain</strong></span>
+              </li>
+            </ul>
           </div>
           <div class="col-md-5 offset-md-1">
-            <form>
+            <!-- FORMULAR DE INQUIRY - TRIMITE CĂTRE submit-inquiry.php -->
+            <!--
+              Acest formular trimite datele utilizatorului către un script PHP care procesează solicitarea.
+              Funcționalitatea dinamică este implementată prin intermediul JavaScript și trimite datele către server.
+            -->
+            <form id="inquiryForm">
               <div class="mb-4">
-                <input type="text" name="name" class="form-control bg-secondary" placeholder="Enter name">
+                <input type="text" name="name" class="form-control bg-secondary" placeholder="Enter name" required>
               </div>
               <div class="mb-4">
-                <input type="email" name="email" class="form-control bg-secondary" placeholder="Enter email">
+                <input type="email" name="email" class="form-control bg-secondary" placeholder="Enter email" required>
               </div>
               <div class="mb-4">
                 <input type="text" name="phone" class="form-control bg-secondary" placeholder="Enter phone">
@@ -264,12 +278,12 @@
                   <option value="">Interested In...</option>
                   <option value="First team">First team</option>
                   <option value="Shop">Shop</option>
-                  <option value="News">News</option>
+                  <option value="Tickets">Tickets</option>
                   <option value="Fixtures and Tickets">Fixtures and Tickets</option>
                 </select>
               </div>
               <div class="mb-4 form-check">
-                <input type="checkbox" name="agree" id="agree-check" />
+                <input type="checkbox" name="agree" id="agree-check" required />
                 <label for="agree-check" class="form-check-label">
                   I agree to the <a href="privacy.php">Privacy Policy</a>
                 </label>
@@ -371,7 +385,11 @@
       </div>
     </div>
 
-    <!-- Form Success Modal -->
+    <!-- MODAL DE SUCCES PENTRU FORMULAR - AFIȘARE DUPĂ TRIMITERE -->
+    <!--
+      Acest modal este afișat atunci când formularul de contact este trimis cu succes.
+      Folosște Bootstrap pentru afișarea unui popup de confirmare.
+    -->
     <div class="modal fade" id="formSuccessModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-secondary text-white border-0">
@@ -392,35 +410,92 @@
       </div>
     </div>
 
+    <!-- SCRIPTURI JAVASCRIPT - FUNCȚIONALITĂȚI DINAMICE -->
+    <script src="js/replaceme.min.js"></script>     <!-- Pentru animații de text -->
+    <script src="js/bootstrap.bundle.min.js"></script> <!-- Framework Bootstrap pentru componente UI (modale, alerte) -->
+    <script src="js/script.js"></script>              <!-- Script principal pentru funcționalități generale -->
+    <script src="js/cart.js"></script>                <!-- Gestionare coș de cumpărături (actualizare badge) -->
+    <script src="js/navbar-auth.js"></script>          <!-- Actualizare dinamică navbar login/logout -->
     
-    
-    <script src="js/replaceme.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/navbar-auth.js"></script>
+    <!-- SCRIPT FORMULAR DE CONTACT - TRIMITERE CĂTRE PHP -->
     <script>
-      // Typing animation for logo "- FANS PORTAL" text
+      /**
+       * FUNCȚIONALITATE FORMULAR DE CONTACT
+       * Trimite datele formularului către submit-inquiry.php
+       * Include validare și afișare modal de succes
+       */
+      document.addEventListener('DOMContentLoaded', function() {
+        const inquiryForm = document.getElementById('inquiryForm');
+        
+        if (inquiryForm) {
+          inquiryForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevenim comportamentul default de submit
+            
+            // Colectăm datele din formular
+            const formData = new FormData(this);
+            
+            try {
+              // Trimitem datele către server folosind fetch API
+              const response = await fetch('php/submit-inquiry.php', {
+                method: 'POST',
+                body: formData // FormData include automat toate câmpurile formularului
+              });
+              
+              const result = await response.json();
+              
+              if (response.ok && result.success) {
+                // SUCCES - Afișăm modalul de confirmare
+                const successModal = new bootstrap.Modal(document.getElementById('formSuccessModal'));
+                successModal.show();
+                
+                // Resetăm formularul după trimitere
+                this.reset();
+              } else {
+                // EROARE - Afișăm mesaj de eroare
+                alert('Error: ' + (result.error || 'Unknown error occurred'));
+              }
+            } catch (error) {
+              console.error('Error submitting form:', error);
+              alert('Error submitting form. Please try again.');
+            }
+          });
+        }
+      });
+    </script>
+    
+    <!-- SCRIPT ANIMAȚIE LOGO - EFECT VISUAL DINAMIC -->
+    <script>
+      /**
+       * ANIMAȚIE TYPING PENTRU LOGO "- FANS PORTAL"
+       * Creează un efect de scriere automată pentru textul logo-ului
+       * Include cursor care clipește și eliminare automat după 7 secunde
+       */
       document.addEventListener('DOMContentLoaded', function() {
         const logoText = document.getElementById('logoText');
         if (logoText) {
-          const text = '- FANS PORTAL';
-          logoText.textContent = '';
-          logoText.style.opacity = '1';
+          const text = '- FANS PORTAL';        // Textul de afișat
+          logoText.textContent = '';            // Golim elementul la început
+          logoText.style.opacity = '1';         // Asigurăm vizibilitatea
           
-          let i = 0;
-          let showCursor = true;
+          let i = 0;                           // Index pentru caracterul curent
+          let showCursor = true;               // Flag pentru cursorul care clipește
+          
+          /**
+           * FUNCȚIA PRINCIPALĂ DE TYPING
+           * Adaugă caractere unul câte unul cu efect de cursor care clipește
+           */
           function typeWriter() {
             if (i < text.length) {
-              // Show current text + cursor
+              // Afișăm textul până la caracterul curent + cursor (dacă e vizibil)
               logoText.innerHTML = text.substring(0, i + 1) + (showCursor ? '<span class="typing-cursor">|</span>' : '');
-              showCursor = !showCursor; // Toggle cursor visibility
+              showCursor = !showCursor; // Inversăm vizibilitatea cursorului pentru efect de clipire
               i++;
-              setTimeout(typeWriter, 175); // Speed of typing (175ms per character)
+              setTimeout(typeWriter, 175); // Viteză de typing: 175ms per caracter
             } else {
-              // After typing is complete, keep cursor blinking
+              // După ce s-a terminat scrierea, menținem cursorul care clipește
               logoText.innerHTML = text + '<span class="typing-cursor">|</span>';
-              // Remove cursor after 7 blinks (7 seconds)
+              
+              // Eliminăm cursorul după 7 secunde (7 blinks)
               setTimeout(() => {
                 const cursor = logoText.querySelector('.typing-cursor');
                 if (cursor) {
@@ -430,7 +505,7 @@
             }
           }
           
-          // Start typing animation after a short delay
+          // Pornim animația după un scurt delay pentru efect dramatic
           setTimeout(typeWriter, 500);
         }
       });
